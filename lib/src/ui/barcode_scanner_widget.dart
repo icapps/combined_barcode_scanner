@@ -6,13 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Controller used to control the scanner widget
-class BarcodeScannerController {
+class BarcodeScannerWidgetController {
   /// Called when all passed scanners have been configured
   final VoidCallback onScannersConfigured;
   VoidCallback? _onStartListener;
   VoidCallback? _onEndListener;
 
-  BarcodeScannerController(this.onScannersConfigured);
+  BarcodeScannerWidgetController(this.onScannersConfigured);
 
   /// Call this to (re-)start the scanners
   void start() {
@@ -43,7 +43,7 @@ class BarcodeScannerWidget extends StatefulWidget {
   final List<BarcodeScanner> scanners;
 
   /// The controller for this scanner
-  final BarcodeScannerController controller;
+  final BarcodeScannerWidgetController controller;
 
   const BarcodeScannerWidget({
     required this.onScan,
@@ -126,9 +126,17 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     );
   }
 
-  void _startCalled() {}
+  void _startCalled() {
+    for (final value in _configuredScanners) {
+      value?.controller.start();
+    }
+  }
 
-  void _endCalled() {}
+  void _endCalled() {
+    for (final value in _configuredScanners) {
+      value?.controller.pause();
+    }
+  }
 
   void _buildScanners() {
     _configuredScanners.clear();

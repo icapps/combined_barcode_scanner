@@ -16,6 +16,10 @@ abstract class BarcodeScanner {
   /// it is performant
   ScannerProperties get properties;
 
+  /// The controller controlling the scanner. Will not be called until
+  /// [configure] completes
+  BarcodeScannerController get controller;
+
   /// Configures the scanner with the provided parameters
   ///
   /// This method can be called multiple times
@@ -35,6 +39,16 @@ abstract class BarcodeScanner {
     ScannerConfiguration configuration,
     BuildContext context,
   );
+}
+
+/// Controller interface for [BarcodeScanner]
+abstract class BarcodeScannerController {
+  /// Starts the scanner if it is not running
+  void start();
+
+  /// Pauses the scanner, no events should be reported until
+  /// [start] is called
+  void pause();
 }
 
 /// Hold the result of a successful scan.

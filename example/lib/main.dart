@@ -32,12 +32,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late final BarcodeScannerController _controller;
+  late final BarcodeScannerWidgetController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = BarcodeScannerController(() {});
+    _controller = BarcodeScannerWidgetController(() {});
   }
 
   @override

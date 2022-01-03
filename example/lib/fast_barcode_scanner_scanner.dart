@@ -33,6 +33,7 @@ class FastBarcodeScanner implements BarcodeScanner {
     required ValueChanged<BarcodeScanResult> onScan,
   }) {
     _onScan = onScan;
+    controller = FastBarcodeScannerController();
     // ignore: void_checks
     return SynchronousFuture(1);
   }
@@ -58,6 +59,21 @@ class FastBarcodeScanner implements BarcodeScanner {
         },
         hasUI: true,
       );
+
+  @override
+  late BarcodeScannerController controller;
+}
+
+class FastBarcodeScannerController implements BarcodeScannerController {
+  @override
+  void pause() {
+    fbs.CameraController.instance.pauseDetector();
+  }
+
+  @override
+  void start() {
+    fbs.CameraController.instance.resumeDetector();
+  }
 }
 
 BarcodeScanResult _mapBarcode(fbs.Barcode code) {
