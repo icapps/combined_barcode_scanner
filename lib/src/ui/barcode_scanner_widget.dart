@@ -52,7 +52,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: configuredScanners.map((e) => e?.properties.hasUI == true ? e!.createUI(widget.configuration, context)! : const SizedBox()).toList(),
+      children: configuredScanners.map((e) => e?.properties.hasUI == true ? e!.buildUI(widget.configuration, context)! : const SizedBox()).toList(),
     );
   }
 }

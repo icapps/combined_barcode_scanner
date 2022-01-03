@@ -11,7 +11,7 @@ abstract class BarcodeScanner {
 
   void dispose();
 
-  Widget? createUI(
+  Widget? buildUI(
     ScannerConfiguration configuration,
     BuildContext context,
   );

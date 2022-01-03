@@ -1,4 +1,5 @@
-import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
+import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
+import 'package:example/fast_barcode_scanner_scanner.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,14 +32,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(),
+      body: BarcodeScannerWidget(
+        onScan: (code) => print(code),
+        configuration: const ScannerConfiguration(enableFormats: [BarcodeFormat.qr]),
+        scanners: [FastBarcodeScanner()],
+      ),
     );
   }
 }
