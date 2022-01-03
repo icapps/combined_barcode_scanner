@@ -11,25 +11,26 @@ class FastBarcodeScanner implements BarcodeScanner {
     type: CameraType.back,
   );
 
-  late ValueChanged<String> _onScan;
+  late ValueChanged<BarcodeScanResult> _onScan;
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) {
-    final cameraConfig = configuration.cameraConfiguration ?? _defaultCameraConfig;
+    final cameraConfig =
+        configuration.cameraConfiguration ?? _defaultCameraConfig;
     return fbs.BarcodeCamera(
       types: _mapTypes(configuration.enableFormats),
       resolution: _mapResolution(cameraConfig.resolution),
       mode: _mapDetectionMode(cameraConfig.mode),
       position: _mapCameraPosition(cameraConfig.type),
       framerate: _mapFrameRate(cameraConfig.frameRate),
-      onScan: (code) => _onScan(code.value),
+      onScan: (code) => _onScan(_mapBarcode(code)),
     );
   }
 
   @override
   Future<void> configure({
     required ScannerConfiguration configuration,
-    required ValueChanged<String> onScan,
+    required ValueChanged<BarcodeScanResult> onScan,
   }) {
     _onScan = onScan;
     // ignore: void_checks
@@ -57,6 +58,45 @@ class FastBarcodeScanner implements BarcodeScanner {
         },
         hasUI: true,
       );
+}
+
+BarcodeScanResult _mapBarcode(fbs.Barcode code) {
+  return BarcodeScanResult(
+    code: code.value,
+    format: _mapFastToType(code.type),
+  );
+}
+
+BarcodeFormat _mapFastToType(fbs.BarcodeType type) {
+  switch (type) {
+    case fbs.BarcodeType.aztec:
+      return BarcodeFormat.aztec;
+    case fbs.BarcodeType.code128:
+      return BarcodeFormat.code128;
+    case fbs.BarcodeType.code39:
+      return BarcodeFormat.code39;
+    case fbs.BarcodeType.codabar:
+      return BarcodeFormat.codabar;
+    case fbs.BarcodeType.dataMatrix:
+      return BarcodeFormat.dataMatrix;
+    case fbs.BarcodeType.ean13:
+      return BarcodeFormat.ean13;
+    case fbs.BarcodeType.ean8:
+      return BarcodeFormat.ean8;
+    case fbs.BarcodeType.itf:
+      return BarcodeFormat.itf;
+    case fbs.BarcodeType.pdf417:
+      return BarcodeFormat.pdf417;
+    case fbs.BarcodeType.qr:
+      return BarcodeFormat.qr;
+    case fbs.BarcodeType.upcA:
+      return BarcodeFormat.upcA;
+    case fbs.BarcodeType.upcE:
+      return BarcodeFormat.upcE;
+    default:
+      throw ArgumentError(
+          'Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
+  }
 }
 
 fbs.Framerate _mapFrameRate(int frameRate) {
@@ -99,7 +139,7 @@ fbs.Resolution _mapResolution(CameraResolution resolution) {
   }
 }
 
-List<fbs.BarcodeType> _mapTypes(List<BarcodeFormat> enableFormats) {
+List<fbs.BarcodeType> _mapTypes(Set<BarcodeFormat> enableFormats) {
   final types = <fbs.BarcodeType>[];
   for (final format in enableFormats) {
     switch (format) {

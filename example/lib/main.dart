@@ -32,6 +32,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final BarcodeScannerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = BarcodeScannerController(() {});
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +53,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: BarcodeScannerWidget(
+        controller: _controller,
         onScan: (code) => print(code),
-        configuration: const ScannerConfiguration(enableFormats: [BarcodeFormat.qr]),
+        configuration:
+            const ScannerConfiguration(enableFormats: {BarcodeFormat.qr}),
         scanners: [FastBarcodeScanner()],
       ),
     );
