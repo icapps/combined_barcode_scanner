@@ -43,17 +43,22 @@ class ScannerConfiguration {
     return {
       'enableFormats':
           enableFormats.map((e) => e.index).toList(growable: false),
-      'cameraConfiguration': cameraConfiguration,
+      'cameraConfiguration': cameraConfiguration?.toMap(),
     };
   }
 
   factory ScannerConfiguration.fromMap(Map<String, dynamic> map) {
+    final camMap =
+        (map['cameraConfiguration'] as Map?)?.cast<String, dynamic>();
+    final camConfig =
+        camMap != null ? CameraConfiguration.fromMap(camMap) : null;
+
     return ScannerConfiguration(
       enableFormats: (map['enableFormats'] as List)
           .cast<int>()
           .map((e) => BarcodeFormat.values[e])
           .toSet(),
-      cameraConfiguration: map['cameraConfiguration'] as CameraConfiguration,
+      cameraConfiguration: camConfig,
     );
   }
 }
@@ -105,7 +110,7 @@ class CameraConfiguration {
 
   Map<String, dynamic> toMap() {
     return {
-      'resolution': resolution,
+      'resolution': resolution.index,
       'frameRate': frameRate,
       'mode': mode.index,
       'type': type.index,
@@ -114,7 +119,7 @@ class CameraConfiguration {
 
   factory CameraConfiguration.fromMap(Map<String, dynamic> map) {
     return CameraConfiguration(
-      resolution: map['resolution'] as CameraResolution,
+      resolution: CameraResolution.values[map['resolution'] as int],
       frameRate: map['frameRate'] as int,
       mode: BarcodeDetectionMode.values[map['mode'] as int],
       type: CameraType.values[map['type'] as int],

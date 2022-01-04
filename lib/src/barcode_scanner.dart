@@ -87,14 +87,14 @@ class BarcodeScanResult {
   Map<String, dynamic> toMap() {
     return {
       'code': code,
-      'format': format,
+      'format': format.index,
     };
   }
 
   factory BarcodeScanResult.fromMap(Map<String, dynamic> map) {
     return BarcodeScanResult(
       code: map['code'] as String,
-      format: map['format'] as BarcodeFormat,
+      format: BarcodeFormat.values[map['format'] as int],
     );
   }
 }

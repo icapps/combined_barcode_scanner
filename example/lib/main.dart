@@ -54,9 +54,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: BarcodeScannerWidget(
         controller: _controller,
-        onScan: (code) => print(code),
-        configuration:
-            const ScannerConfiguration(enableFormats: {BarcodeFormat.qr}),
+        onScan: (code) {
+          print("GOT BARCODE =========== ${code.code}");
+        },
+        configuration: const ScannerConfiguration(
+          enableFormats: {BarcodeFormat.qr},
+          cameraConfiguration: CameraConfiguration(
+            frameRate: 30,
+            mode: BarcodeDetectionMode.continuous,
+            resolution: CameraResolution.medium,
+            type: CameraType.back,
+          ),
+        ),
         scanners: [FastBarcodeScanner()],
       ),
     );

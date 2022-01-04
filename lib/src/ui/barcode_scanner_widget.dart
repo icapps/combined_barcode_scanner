@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
-import 'package:combined_barcode_scanner/src/barcode_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
