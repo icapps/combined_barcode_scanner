@@ -1,6 +1,6 @@
 name: combined_barcode_scanner
 description: Barcode scanner package that combines multiple sources behind a simple interface
-version: 0.0.1-dev.0
+version: 0.0.1-dev.1
 homepage: https://github.com/icapps/combined_barcode_scanner
 
 environment:

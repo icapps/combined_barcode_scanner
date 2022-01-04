@@ -60,8 +60,8 @@ class BarcodeScanResult {
   /// The value of the barcode
   final String code;
 
-  /// The format of the barcode
-  final BarcodeFormat format;
+  /// The format of the barcode if reported by the library
+  final BarcodeFormat? format;
 
   const BarcodeScanResult({
     required this.code,
@@ -87,14 +87,16 @@ class BarcodeScanResult {
   Map<String, dynamic> toMap() {
     return {
       'code': code,
-      'format': format.index,
+      'format': format?.index,
     };
   }
 
   factory BarcodeScanResult.fromMap(Map<String, dynamic> map) {
+    final formatCode = map['format'] as int?;
+    final format = formatCode == null ? null : BarcodeFormat.values[formatCode];
     return BarcodeScanResult(
       code: map['code'] as String,
-      format: BarcodeFormat.values[map['format'] as int],
+      format: format,
     );
   }
 }

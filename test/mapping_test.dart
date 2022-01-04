@@ -65,6 +65,10 @@ void main() {
       const result2 = BarcodeScanResult(code: '124', format: BarcodeFormat.qr);
       expect(BarcodeScanResult.fromMap(result2.toMap()), result2);
       _expectAllowedType(result2.toMap());
+
+      const result3 = BarcodeScanResult(code: '124', format: null);
+      expect(BarcodeScanResult.fromMap(result3.toMap()), result3);
+      _expectAllowedType(result3.toMap());
     });
   });
 }
