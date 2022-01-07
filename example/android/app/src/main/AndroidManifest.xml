@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.icapps.example">
+          package="com.icapps.example" xmlns:tools="http://schemas.android.com/tools">
    <application
         android:label="example"
+        tools:replace="android:label"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
