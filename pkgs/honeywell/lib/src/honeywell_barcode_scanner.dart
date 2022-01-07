@@ -31,7 +31,7 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
     if (_supported) {
       _scanner.scannerCallBack = _ScannerWrapper(onScan);
 
-      Map<String, dynamic> properties = {
+      final properties = <String, dynamic>{
         ...CodeFormatUtils.getAsPropertiesComplement(
             _makeFormats(configuration.enableFormats)),
       };

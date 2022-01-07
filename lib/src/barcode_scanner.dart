@@ -85,7 +85,7 @@ class BarcodeScanResult {
   int get hashCode => code.hashCode ^ format.hashCode;
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String,dynamic>{
       'code': code,
       'format': format?.index,
     };
