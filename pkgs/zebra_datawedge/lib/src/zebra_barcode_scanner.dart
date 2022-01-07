@@ -40,9 +40,10 @@ class ZebraBarcodeScanner implements BarcodeScanner {
     required ValueChanged<BarcodeScanResult> onScan,
   }) async {
     _supported = await _controller.isSupported;
-    await _controller.init(profileName, _mapFormats(configuration.enableFormats));
-
-    _controller.scannerCallBack = _ScannerWrapper(onScan);
+    if (_supported) {
+      await _controller.init(profileName, _mapFormats(configuration.enableFormats));
+      _controller.scannerCallBack = _ScannerWrapper(onScan);
+    }
     controller = _ZebraController(_controller, enabled: _supported);
   }
 
