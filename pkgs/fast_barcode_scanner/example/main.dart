@@ -1,7 +1,6 @@
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:combined_barcode_scanner_fast/combined_barcode_scanner_fast.dart';
-import 'package:combined_barcode_scanner_honeywell/combined_barcode_scanner_honeywell.dart';
-import 'package:combined_barcode_scanner_unitech/combined_barcode_scanner_unitech.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,7 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BarcodeScannerWidget(
         controller: _controller,
         onScan: (code) {
-          print("GOT BARCODE =========== ${code.code}");
+          if (kDebugMode) {
+            print("GOT BARCODE =========== ${code.code}");
+          }
         },
         configuration: const ScannerConfiguration(
           enableFormats: {BarcodeFormat.qr},
@@ -68,11 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             type: CameraType.back,
           ),
         ),
-        scanners: [
-          FastBarcodeScanner(),
-          HoneywellBarcodeScanner(),
-          UnitechBarcodeScanner(),
-        ],
+        scanners: [FastBarcodeScanner()],
       ),
     );
   }

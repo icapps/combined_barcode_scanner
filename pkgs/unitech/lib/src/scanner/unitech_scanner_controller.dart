@@ -6,7 +6,9 @@ import 'package:combined_barcode_scanner_unitech/src/scanner/unitech_scanner_int
 class UnitechScannerController {
   UnitechScannerCallBack? _scannerCallBack;
 
-  set scannerCallBack(UnitechScannerCallBack scannerCallBack) => _scannerCallBack = scannerCallBack; // ignore: avoid_setters_without_getters
+  set scannerCallBack(UnitechScannerCallBack scannerCallBack) =>
+      _scannerCallBack =
+          scannerCallBack; // ignore: avoid_setters_without_getters
 
   StreamSubscription<String>? _subscription;
 
@@ -19,7 +21,8 @@ class UnitechScannerController {
   }
 
   Future<void> startScanning() async {
-    _subscription ??= UnitechScannerInterface.events().listen((data) => _scannerCallBack?.onDecoded(data));
+    _subscription ??= UnitechScannerInterface.events()
+        .listen((data) => _scannerCallBack?.onDecoded(data));
   }
 
   Future<void> stopScanning() async {

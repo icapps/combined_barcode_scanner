@@ -14,7 +14,8 @@ class UnitechScannerInterface {
   }
 
   static Stream<String> events() {
-    final channel = _eventChannel ??= const EventChannel('unitech_scanner/scan');
+    final channel =
+        _eventChannel ??= const EventChannel('unitech_scanner/scan');
     return channel.receiveBroadcastStream().map((dynamic e) => e.toString());
   }
 
@@ -25,5 +26,4 @@ class UnitechScannerInterface {
   static Future<bool> stopScanning() async {
     return await _channel.invokeMethod<bool>('stopScan') == true;
   }
-
 }

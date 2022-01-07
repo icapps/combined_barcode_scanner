@@ -1,15 +1,22 @@
-# unitech_scanner
+# Unitech combined scanner implementation
 
-A new flutter plugin project.
+This implementation of a combined scanner (see https://pub.dev/packages/combined_barcode_scanner)
+interfaces with the unitech hardware scanners to implement scanning behaviour
 
-## Getting Started
+Please follow the installation instructions in https://pub.dev/packages/combined_barcode_scanner
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+### Example
+```dart
+final widget = BarcodeScannerWidget(
+  controller: _controller,
+  onScan: (code) {
+    if (kDebugMode) {
+      print("GOT BARCODE =========== ${code.code}");
+    }
+  },
+  configuration: const ScannerConfiguration(
+    enableFormats: {BarcodeFormat.qr},
+  ),
+  scanners: [UnitechBarcodeScanner()],
+);
+```

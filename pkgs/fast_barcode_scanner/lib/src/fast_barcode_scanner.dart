@@ -3,6 +3,10 @@ import 'package:fast_barcode_scanner/fast_barcode_scanner.dart' as fbs;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// Barcode scanner implementation that uses the fast_barcode_scanner library.
+///
+/// Please follow the installation instructions in
+/// [https://pub.dev/packages/fast_barcode_scanner]
 class FastBarcodeScanner implements BarcodeScanner {
   static const _defaultCameraConfig = CameraConfiguration(
     resolution: CameraResolution.medium,
