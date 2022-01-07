@@ -11,8 +11,12 @@ dependencies:
     sdk: flutter
   fast_barcode_scanner: 1.1.4
   cupertino_icons: ^1.0.2
-  combined_barcode_scanner:
-    path: ../
+  combined_barcode_scanner_fast:
+    path: ../pkgs/fast_barcode_scanner
+  combined_barcode_scanner_unitech:
+    path: ../pkgs/unitech
+  combined_barcode_scanner_honeywell:
+    path: ../pkgs/honeywell
 
 dev_dependencies:
   flutter_test:
