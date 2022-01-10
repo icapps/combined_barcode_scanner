@@ -37,7 +37,7 @@ class ScannerProperties {
   }
 
   Map<String, dynamic> toMap() {
-    return <String,dynamic>{
+    return <String, dynamic>{
       'hasUI': hasUI,
       'supportedFormats':
           supportedFormats.map((e) => e.index).toList(growable: false),

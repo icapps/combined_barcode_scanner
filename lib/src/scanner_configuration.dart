@@ -40,7 +40,7 @@ class ScannerConfiguration {
   int get hashCode => enableFormats.hashCode ^ cameraConfiguration.hashCode;
 
   Map<String, dynamic> toMap() {
-    return <String,dynamic>{
+    return <String, dynamic>{
       'enableFormats':
           enableFormats.map((e) => e.index).toList(growable: false),
       'cameraConfiguration': cameraConfiguration?.toMap(),
@@ -109,7 +109,7 @@ class CameraConfiguration {
       resolution.hashCode ^ frameRate.hashCode ^ mode.hashCode ^ type.hashCode;
 
   Map<String, dynamic> toMap() {
-    return <String,dynamic>{
+    return <String, dynamic>{
       'resolution': resolution.index,
       'frameRate': frameRate,
       'mode': mode.index,

@@ -86,7 +86,8 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     // If the configuration changes, we need to rebuild all scanners.
     // Wait for the previous configuration to finish first before calling
     // dispose
-    if (!listEquals(widget.scanners, oldWidget.scanners) || widget.configuration != oldWidget.configuration) {
+    if (!listEquals(widget.scanners, oldWidget.scanners) ||
+        widget.configuration != oldWidget.configuration) {
       _configureCompleter.future.then((_) {
         _configureCompleter = Completer<void>();
         for (final scanner in _configuredScanners) {
@@ -116,7 +117,11 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: _configuredScanners.map((e) => e?.properties.hasUI == true ? e!.buildUI(widget.configuration, context)! : const SizedBox()).toList(),
+      children: _configuredScanners
+          .map((e) => e?.properties.hasUI == true
+              ? e!.buildUI(widget.configuration, context)!
+              : const SizedBox())
+          .toList(),
     );
   }
 
@@ -142,7 +147,9 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     var completed = 0;
     for (final scanner in widget.scanners) {
       final index = c++;
-      scanner.configure(configuration: widget.configuration, onScan: widget.onScan).then((_) {
+      scanner
+          .configure(configuration: widget.configuration, onScan: widget.onScan)
+          .then((_) {
         ++completed;
         if (mounted) {
           _configuredScanners[index] = scanner;
