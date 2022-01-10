@@ -17,6 +17,8 @@ dependencies:
     path: ../pkgs/unitech
   combined_barcode_scanner_honeywell:
     path: ../pkgs/honeywell
+  combined_barcode_scanner_zebra:
+    path: ../pkgs/zebra_datawedge
 
 dev_dependencies:
   flutter_test:
