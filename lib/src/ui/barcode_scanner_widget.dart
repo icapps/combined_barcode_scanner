@@ -157,9 +157,8 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
         } else {
           scanner.dispose();
         }
-      }).catchError((e) {
+      }).catchError((dynamic e) {
         ++completed;
-        return e;
       }).then((_) {
         if (completed == widget.scanners.length) {
           _configureCompleter.complete();

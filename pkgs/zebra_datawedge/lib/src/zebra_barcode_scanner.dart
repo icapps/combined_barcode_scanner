@@ -28,9 +28,9 @@ class ZebraBarcodeScanner implements BarcodeScanner {
 
   @override
   Widget? buildUI(
-      ScannerConfiguration configuration,
-      BuildContext context,
-      ) {
+    ScannerConfiguration configuration,
+    BuildContext context,
+  ) {
     throw UnimplementedError();
   }
 
@@ -41,7 +41,8 @@ class ZebraBarcodeScanner implements BarcodeScanner {
   }) async {
     _supported = await _controller.isSupported;
     if (_supported) {
-      await _controller.init(profileName, _mapFormats(configuration.enableFormats));
+      await _controller.init(
+          profileName, _mapFormats(configuration.enableFormats));
       _controller.scannerCallBack = _ScannerWrapper(onScan);
     }
     controller = _ZebraController(_controller, enabled: _supported);
@@ -98,9 +99,9 @@ class _ZebraController implements BarcodeScannerController {
   final bool enabled;
 
   _ZebraController(
-      this._scanner, {
-        required this.enabled,
-      });
+    this._scanner, {
+    required this.enabled,
+  });
 
   @override
   void pause() {
@@ -118,21 +119,35 @@ class _ZebraController implements BarcodeScannerController {
 }
 
 String? _mapFormat(BarcodeFormat e) {
-  switch (e){
-    case BarcodeFormat.qr: return QRCODE;
-    case BarcodeFormat.aztec: return AZTEC;
-    case BarcodeFormat.codabar: return CODEBAR;
-    case BarcodeFormat.code39: return CODE39;
-    case BarcodeFormat.code93: return CODE93;
-    case BarcodeFormat.code128: return CODE128;
-    case BarcodeFormat.dataMatrix: return DATAMATRIX;
-    case BarcodeFormat.ean8: return EAN8;
-    case BarcodeFormat.ean13: return EAN13;
-    case BarcodeFormat.maxiCode: return MAXICODE;
-    case BarcodeFormat.pdf417: return PDF417;
-    case BarcodeFormat.upcA: return UPCA;
-    case BarcodeFormat.upcE: return UPCE0;
-    default: return null;
+  switch (e) {
+    case BarcodeFormat.qr:
+      return QRCODE;
+    case BarcodeFormat.aztec:
+      return AZTEC;
+    case BarcodeFormat.codabar:
+      return CODEBAR;
+    case BarcodeFormat.code39:
+      return CODE39;
+    case BarcodeFormat.code93:
+      return CODE93;
+    case BarcodeFormat.code128:
+      return CODE128;
+    case BarcodeFormat.dataMatrix:
+      return DATAMATRIX;
+    case BarcodeFormat.ean8:
+      return EAN8;
+    case BarcodeFormat.ean13:
+      return EAN13;
+    case BarcodeFormat.maxiCode:
+      return MAXICODE;
+    case BarcodeFormat.pdf417:
+      return PDF417;
+    case BarcodeFormat.upcA:
+      return UPCA;
+    case BarcodeFormat.upcE:
+      return UPCE0;
+    default:
+      return null;
   }
 }
 
