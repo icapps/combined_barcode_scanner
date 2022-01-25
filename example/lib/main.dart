@@ -86,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                child: Icon(_controller.torchState ? Icons.flash_off : Icons.flash_on),
+                child: Icon(
+                    _controller.torchState ? Icons.flash_off : Icons.flash_on),
                 onPressed: () {
                   _controller.toggleTorch();
                   setState(() {});

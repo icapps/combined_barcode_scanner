@@ -48,7 +48,8 @@ class BlueBirdBarcodeScanner implements BarcodeScanner {
   }
 
   @override
-  final ScannerProperties properties = const ScannerProperties(hasUI: false, supportedFormats: {
+  final ScannerProperties properties =
+      const ScannerProperties(hasUI: false, supportedFormats: {
     BarcodeFormat.codabar,
     BarcodeFormat.code39,
     BarcodeFormat.code93,
