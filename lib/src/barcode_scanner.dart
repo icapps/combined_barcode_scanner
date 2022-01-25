@@ -50,10 +50,10 @@ abstract class BarcodeScannerController {
   bool get torchState => false;
 
   /// Switch between cameras (if supported. see [supportsSwitchingCamera])
-  void toggleCamera() {}
+  Future<void> toggleCamera() async {}
 
   /// Switch the torch on/off (see [torchState] for current state)
-  void toggleTorch() {}
+  Future<void> toggleTorch() async {}
 
   /// Starts the scanner if it is not running
   void start();

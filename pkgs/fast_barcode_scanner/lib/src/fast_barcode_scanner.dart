@@ -84,10 +84,10 @@ class FastBarcodeScannerController extends BarcodeScannerController {
       fbs.CameraController.instance.canChangeCamera();
 
   @override
-  void toggleCamera() => fbs.CameraController.instance.toggleCamera();
+  Future<void> toggleCamera() => fbs.CameraController.instance.toggleCamera();
 
   @override
-  void toggleTorch() => fbs.CameraController.instance.toggleTorch();
+  Future<void> toggleTorch() => fbs.CameraController.instance.toggleTorch();
 
   @override
   bool get torchState => fbs.CameraController.instance.state.torchState;
