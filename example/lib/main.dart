@@ -38,6 +38,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late final BarcodeScannerWidgetController _controller;
   bool _supportsSwitchingCamera = false;
+  bool _supportsSwitchingTorch = false;
 
   @override
   void initState() {
@@ -45,6 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _controller = BarcodeScannerWidgetController();
     _controller.supportsSwitchingCamera
         .then((value) => setState(() => _supportsSwitchingCamera = value));
+    _controller.supportsSwitchingTorch
+        .then((value) => setState(() => _supportsSwitchingTorch = value));
   }
 
   @override
@@ -88,14 +91,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              MaterialButton(
-                child: Icon(
-                    _controller.torchState ? Icons.flash_off : Icons.flash_on),
-                onPressed: () {
-                  _controller.toggleTorch();
-                  setState(() {});
-                },
-              ),
+              if (_supportsSwitchingTorch)
+                MaterialButton(
+                  child: Icon(_controller.torchState
+                      ? Icons.flash_off
+                      : Icons.flash_on),
+                  onPressed: () {
+                    _controller.toggleTorch();
+                    setState(() {});
+                  },
+                ),
               if (_supportsSwitchingCamera)
                 MaterialButton(
                   child: Icon(Icons.flip_camera_ios),
