@@ -56,26 +56,48 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: BarcodeScannerWidget(
-        controller: _controller,
-        onScan: (code) {
-          print("GOT BARCODE =========== ${code.code}");
-        },
-        configuration: const ScannerConfiguration(
-          enableFormats: {BarcodeFormat.qr},
-          cameraConfiguration: CameraConfiguration(
-            frameRate: 30,
-            mode: BarcodeDetectionMode.continuous,
-            resolution: CameraResolution.medium,
-            type: CameraType.back,
+      body: Column(
+        children: [
+          Expanded(
+            child: BarcodeScannerWidget(
+              controller: _controller,
+              onScan: (code) {
+                print("GOT BARCODE =========== ${code.code}");
+              },
+              configuration: const ScannerConfiguration(
+                enableFormats: {BarcodeFormat.qr},
+                cameraConfiguration: CameraConfiguration(
+                  frameRate: 30,
+                  mode: BarcodeDetectionMode.continuous,
+                  resolution: CameraResolution.medium,
+                  type: CameraType.back,
+                ),
+              ),
+              scanners: [
+                FastBarcodeScanner(),
+                HoneywellBarcodeScanner(),
+                UnitechBarcodeScanner(),
+                BlueBirdBarcodeScanner(),
+                ZebraBarcodeScanner('my_profile'),
+              ],
+            ),
           ),
-        ),
-        scanners: [
-          FastBarcodeScanner(),
-          HoneywellBarcodeScanner(),
-          UnitechBarcodeScanner(),
-          BlueBirdBarcodeScanner(),
-          ZebraBarcodeScanner('my_profile'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MaterialButton(
+                child: Icon(_controller.torchState ? Icons.flash_off : Icons.flash_on),
+                onPressed: () {
+                  _controller.toggleTorch();
+                  setState(() {});
+                },
+              ),
+              MaterialButton(
+                child: Icon(Icons.flip_camera_ios),
+                onPressed: _controller.toggleCamera,
+              ),
+            ],
+          ),
         ],
       ),
     );
