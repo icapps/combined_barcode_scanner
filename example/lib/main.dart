@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _controller = BarcodeScannerWidgetController(() {});
+    _controller = BarcodeScannerWidgetController();
   }
 
   @override

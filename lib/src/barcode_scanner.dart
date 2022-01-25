@@ -43,6 +43,18 @@ abstract class BarcodeScanner {
 
 /// Controller interface for [BarcodeScanner]
 abstract class BarcodeScannerController {
+  /// Whether the device can switch between cameras (for example front vs back)
+  Future<bool> get supportsSwitchingCamera async => false;
+
+  /// Whether the device has a torch that is on
+  bool get torchState => false;
+
+  /// Switch between cameras (if supported. see [supportsSwitchingCamera])
+  void toggleCamera() {}
+
+  /// Switch the torch on/off (see [torchState] for current state)
+  void toggleTorch() {}
+
   /// Starts the scanner if it is not running
   void start();
 
@@ -74,12 +86,7 @@ class BarcodeScanResult {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is BarcodeScanResult &&
-          runtimeType == other.runtimeType &&
-          code == other.code &&
-          format == other.format;
+  bool operator ==(Object other) => identical(this, other) || other is BarcodeScanResult && runtimeType == other.runtimeType && code == other.code && format == other.format;
 
   @override
   int get hashCode => code.hashCode ^ format.hashCode;

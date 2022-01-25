@@ -19,8 +19,7 @@ class FastBarcodeScanner implements BarcodeScanner {
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) {
-    final cameraConfig =
-        configuration.cameraConfiguration ?? _defaultCameraConfig;
+    final cameraConfig = configuration.cameraConfiguration ?? _defaultCameraConfig;
     return fbs.BarcodeCamera(
       types: _mapTypes(configuration.enableFormats),
       resolution: _mapResolution(cameraConfig.resolution),
@@ -68,7 +67,7 @@ class FastBarcodeScanner implements BarcodeScanner {
   late BarcodeScannerController controller;
 }
 
-class FastBarcodeScannerController implements BarcodeScannerController {
+class FastBarcodeScannerController extends BarcodeScannerController {
   @override
   void pause() {
     fbs.CameraController.instance.pauseDetector();
@@ -78,6 +77,18 @@ class FastBarcodeScannerController implements BarcodeScannerController {
   void start() {
     fbs.CameraController.instance.resumeDetector();
   }
+
+  @override
+  Future<bool> get supportsSwitchingCamera => fbs.CameraController.instance.canChangeCamera();
+
+  @override
+  void toggleCamera() => fbs.CameraController.instance.toggleCamera();
+
+  @override
+  void toggleTorch() => fbs.CameraController.instance.toggleTorch();
+
+  @override
+  bool get torchState => fbs.CameraController.instance.state.torchState;
 }
 
 BarcodeScanResult _mapBarcode(fbs.Barcode code) {
@@ -114,8 +125,7 @@ BarcodeFormat _mapFastToType(fbs.BarcodeType type) {
     case fbs.BarcodeType.upcE:
       return BarcodeFormat.upcE;
     default:
-      throw ArgumentError(
-          'Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
+      throw ArgumentError('Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
   }
 }
 

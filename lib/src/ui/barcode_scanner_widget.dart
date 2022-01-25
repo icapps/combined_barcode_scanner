@@ -4,29 +4,53 @@ import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+typedef BoolCallback = bool Function();
+typedef AsyncBoolCallback = Future<bool> Function();
+
 /// Controller used to control the scanner widget
 class BarcodeScannerWidgetController {
   /// Called when all passed scanners have been configured
-  final VoidCallback onScannersConfigured;
+  VoidCallback? onScannersConfigured;
   VoidCallback? _onStartListener;
   VoidCallback? _onEndListener;
+  VoidCallback? _onToggleTorchListener;
+  BoolCallback? _onTorchStateListener;
+  AsyncCallback? _onToggleCameraListener;
+  AsyncBoolCallback? _onSupportsSwitchingCameraListener;
 
-  BarcodeScannerWidgetController(this.onScannersConfigured);
+  BarcodeScannerWidgetController([this.onScannersConfigured]);
 
   /// Call this to (re-)start the scanners
-  void start() {
-    _onStartListener?.call();
-  }
+  void start() => _onStartListener?.call();
 
   /// Call this to pause the scanners
-  void pause() {
-    _onEndListener?.call();
-  }
+  void pause() => _onEndListener?.call();
+
+  /// Whether the device can switch between cameras (for example front vs back)
+  Future<bool> get supportsSwitchingCamera async => await _onSupportsSwitchingCameraListener?.call() ?? false;
+
+  /// Whether the device has a torch that is on
+  bool get torchState => _onTorchStateListener?.call() ?? false;
+
+  /// Switch between cameras (if supported. see [supportsSwitchingCamera])
+  Future<void> toggleCamera() async => _onToggleCameraListener?.call();
+
+  /// Switch the torch on/off (see [torchState] for current state)
+  void toggleTorch() => _onToggleTorchListener?.call();
 
   /// Call this to dispose the controller
   void dispose() {
+    onScannersConfigured = null;
+    _clearListeners();
+  }
+
+  void _clearListeners() {
     _onStartListener = null;
     _onEndListener = null;
+    _onSupportsSwitchingCameraListener = null;
+    _onTorchStateListener = null;
+    _onToggleCameraListener = null;
+    _onToggleTorchListener = null;
   }
 }
 
@@ -63,31 +87,27 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   @override
   void initState() {
     super.initState();
-
-    widget.controller
-      .._onStartListener = _startCalled
-      .._onStartListener = _endCalled;
-
+    _setListeners();
     _buildScanners();
   }
+
+  void _setListeners() => widget.controller
+    .._onStartListener = _startCalled
+    .._onEndListener = _endCalled
+    .._onSupportsSwitchingCameraListener = _onSupportsSwitchingCameraListener
+    .._onTorchStateListener = _onTorchStateListener
+    .._onToggleCameraListener = _onToggleCameraListener
+    .._onToggleTorchListener = _onToggleTorchListener;
 
   @override
   void didUpdateWidget(BarcodeScannerWidget oldWidget) {
     if (!identical(oldWidget.controller, widget.controller)) {
-      oldWidget.controller
-        .._onStartListener = null
-        .._onEndListener = null;
-
-      widget.controller
-        .._onStartListener = _startCalled
-        .._onStartListener = _endCalled;
+      oldWidget.controller._clearListeners();
     }
-
     // If the configuration changes, we need to rebuild all scanners.
     // Wait for the previous configuration to finish first before calling
     // dispose
-    if (!listEquals(widget.scanners, oldWidget.scanners) ||
-        widget.configuration != oldWidget.configuration) {
+    if (!listEquals(widget.scanners, oldWidget.scanners) || widget.configuration != oldWidget.configuration) {
       _configureCompleter.future.then((_) {
         _configureCompleter = Completer<void>();
         for (final scanner in _configuredScanners) {
@@ -97,7 +117,6 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
         _buildScanners();
       });
     }
-
     super.didUpdateWidget(oldWidget);
   }
 
@@ -110,18 +129,14 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
       }
       _configuredScanners.clear();
     });
-
+    widget.controller._clearListeners();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: _configuredScanners
-          .map((e) => e?.properties.hasUI == true
-              ? e!.buildUI(widget.configuration, context)!
-              : const SizedBox())
-          .toList(),
+      children: _configuredScanners.map((e) => e?.properties.hasUI == true ? e!.buildUI(widget.configuration, context)! : const SizedBox()).toList(),
     );
   }
 
@@ -137,6 +152,32 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     }
   }
 
+  Future<bool> _onSupportsSwitchingCameraListener() async {
+    for (final value in _configuredScanners) {
+      if (await value?.controller.supportsSwitchingCamera ?? false) return true;
+    }
+    return false;
+  }
+
+  bool _onTorchStateListener() => _configuredScanners.any((element) => element?.controller.torchState ?? false);
+
+  Future<void> _onToggleCameraListener() async {
+    for (final value in _configuredScanners) {
+      if (await value?.controller.supportsSwitchingCamera ?? false) {
+        value?.controller.toggleCamera();
+        return;
+      }
+    }
+  }
+
+  void _onToggleTorchListener() {
+    for (final value in _configuredScanners) {
+      final state = value?.controller.torchState;
+      value?.controller.toggleTorch();
+      if (state != value?.controller.torchState) return;
+    }
+  }
+
   void _buildScanners() {
     _configuredScanners.clear();
     _configuredScanners.length = widget.scanners.length;
@@ -147,9 +188,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     var completed = 0;
     for (final scanner in widget.scanners) {
       final index = c++;
-      scanner
-          .configure(configuration: widget.configuration, onScan: widget.onScan)
-          .then((_) {
+      scanner.configure(configuration: widget.configuration, onScan: widget.onScan).then((_) {
         ++completed;
         if (mounted) {
           _configuredScanners[index] = scanner;
@@ -163,7 +202,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
         if (completed == widget.scanners.length) {
           _configureCompleter.complete();
           if (mounted) {
-            widget.controller.onScannersConfigured();
+            widget.controller.onScannersConfigured?.call();
           }
         }
       });
