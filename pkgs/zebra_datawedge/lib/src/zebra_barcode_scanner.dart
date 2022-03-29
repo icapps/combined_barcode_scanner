@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/scan_callback.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/zebra_datawedge_controller.dart';
@@ -41,11 +43,11 @@ class ZebraBarcodeScanner implements BarcodeScanner {
   }) async {
     _supported = await _controller.isSupported;
     if (_supported) {
-      await _controller.init(
-          profileName, _mapFormats(configuration.enableFormats));
+      unawaited(_controller.init(
+          profileName, _mapFormats(configuration.enableFormats)));
       _controller.scannerCallBack = _ScannerWrapper(onScan);
     }
-    controller = _ZebraController(_controller, enabled: _supported);
+    controller = _ZebraController(_controller, enabled: _supported)..start();
   }
 
   @override

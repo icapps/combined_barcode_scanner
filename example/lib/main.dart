@@ -71,7 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("GOT BARCODE =========== ${code.code}");
               },
               configuration: const ScannerConfiguration(
-                enableFormats: {BarcodeFormat.qr},
+                enableFormats: {
+                  BarcodeFormat.qr,
+                  BarcodeFormat.code128,
+                },
                 cameraConfiguration: CameraConfiguration(
                   frameRate: 30,
                   mode: BarcodeDetectionMode.continuous,
