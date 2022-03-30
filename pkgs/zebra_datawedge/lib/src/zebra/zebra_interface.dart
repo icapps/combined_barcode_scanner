@@ -29,11 +29,16 @@ class ZebraInterface {
 
   static Future<bool> updateProfile(
       String name, List<String> supportedBarcodes) async {
-    return await _channel.invokeMethod<bool>('updateProfile', <String, dynamic>{
-          'profileName': name,
-          'formats': supportedBarcodes
-        }) ==
-        true;
+    try {
+      return await _channel.invokeMethod<bool>(
+              'updateProfile', <String, dynamic>{
+            'profileName': name,
+            'formats': supportedBarcodes
+          }) ==
+          true;
+    } catch (e) {
+      return false;
+    }
   }
 
   static Stream<String> events() {
