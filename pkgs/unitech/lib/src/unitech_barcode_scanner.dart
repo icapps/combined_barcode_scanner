@@ -81,6 +81,9 @@ class _UnitechController extends BarcodeScannerController {
   final UnitechScannerController _scanner;
   final bool enabled;
 
+  @override
+  bool get isSupported => enabled;
+
   _UnitechController(
     this._scanner, {
     required this.enabled,

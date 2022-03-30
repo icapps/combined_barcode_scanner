@@ -70,6 +70,9 @@ class FastBarcodeScanner implements BarcodeScanner {
 
 class FastBarcodeScannerController extends BarcodeScannerController {
   @override
+  bool get isSupported => true;
+
+  @override
   void pause() {
     fbs.CameraController.instance.pauseDetector();
   }

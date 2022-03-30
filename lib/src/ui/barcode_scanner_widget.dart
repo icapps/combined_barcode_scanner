@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:torch_compat/torch_compat.dart';
 
 typedef BoolCallback = bool Function();
+typedef BoolCallbackWithType = bool Function<T extends BarcodeScanner>();
 typedef AsyncBoolCallback = Future<bool> Function();
 
 /// Controller used to control the scanner widget
@@ -18,6 +19,7 @@ class BarcodeScannerWidgetController {
   AsyncCallback? _onToggleTorchListener;
   AsyncCallback? _onToggleCameraListener;
   AsyncBoolCallback? _onSupportsSwitchingCameraListener;
+  BoolCallbackWithType? _onSupportScannerListener;
 
   BarcodeScannerWidgetController([this.onScannersConfigured]);
 
@@ -44,6 +46,10 @@ class BarcodeScannerWidgetController {
   /// Switch the torch on/off (see [torchState] for current state)
   Future<void> toggleTorch() async => _onToggleTorchListener?.call();
 
+  /// Whether the scanner type is supported
+  bool supportsScanner<T extends BarcodeScanner>() =>
+      _onSupportScannerListener?.call<T>() ?? false;
+
   /// Call this to dispose the controller
   void dispose() {
     onScannersConfigured = null;
@@ -57,6 +63,7 @@ class BarcodeScannerWidgetController {
     _onTorchStateListener = null;
     _onToggleCameraListener = null;
     _onToggleTorchListener = null;
+    _onSupportScannerListener = null;
   }
 }
 
@@ -103,7 +110,8 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     .._onSupportsSwitchingCameraListener = _onSupportsSwitchingCameraListener
     .._onTorchStateListener = _onTorchStateListener
     .._onToggleCameraListener = _onToggleCameraListener
-    .._onToggleTorchListener = _onToggleTorchListener;
+    .._onToggleTorchListener = _onToggleTorchListener
+    .._onSupportScannerListener = _onSupportScannerListener;
 
   @override
   void didUpdateWidget(BarcodeScannerWidget oldWidget) {
@@ -180,6 +188,12 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
         return;
       }
     }
+  }
+
+  bool _onSupportScannerListener<T extends BarcodeScanner>() {
+    return _configuredScanners
+        .whereType<T>()
+        .any((element) => element.controller.isSupported);
   }
 
   Future<void> _onToggleTorchListener() async {

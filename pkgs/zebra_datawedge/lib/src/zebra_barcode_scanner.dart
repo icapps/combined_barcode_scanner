@@ -100,6 +100,9 @@ class _ZebraController extends BarcodeScannerController {
   final ZebraDataWedgeController _scanner;
   final bool enabled;
 
+  @override
+  bool get isSupported => enabled;
+
   _ZebraController(
     this._scanner, {
     required this.enabled,
