@@ -1,10 +1,6 @@
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
-import 'package:combined_barcode_scanner_blue_bird/combined_barcode_scanner_blue_bird.dart';
-import 'package:combined_barcode_scanner_fast/combined_barcode_scanner_fast.dart';
-import 'package:combined_barcode_scanner_honeywell/combined_barcode_scanner_honeywell.dart';
-import 'package:combined_barcode_scanner_unitech/combined_barcode_scanner_unitech.dart';
 import 'package:combined_barcode_scanner_usb_keyboard/combined_barcode_scanner_usb_keyboard.dart';
-import 'package:combined_barcode_scanner_zebra/combined_barcode_scanner_zebra.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -60,10 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BarcodeScannerWidget(
         controller: _controller,
         onScan: (code) {
-          print("GOT BARCODE =========== ${code.code}");
+          if (kDebugMode) {
+            print("GOT BARCODE =========== ${code.code}");
+          }
         },
         configuration: const ScannerConfiguration(
-          enableFormats: {BarcodeFormat.qr, BarcodeFormat.code128},
+          enableFormats: {BarcodeFormat.qr},
           cameraConfiguration: CameraConfiguration(
             frameRate: 30,
             mode: BarcodeDetectionMode.continuous,
@@ -71,14 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             type: CameraType.back,
           ),
         ),
-        scanners: [
-          FastBarcodeScanner(),
-          HoneywellBarcodeScanner(),
-          UnitechBarcodeScanner(),
-          BlueBirdBarcodeScanner(),
-          ZebraBarcodeScanner('my_profile'),
-          UsbKeyboardScanner(),
-        ],
+        scanners: [UsbKeyboardScanner()],
       ),
     );
   }
