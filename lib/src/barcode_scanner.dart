@@ -63,9 +63,13 @@ class BarcodeScanResult {
   /// The format of the barcode if reported by the library
   final BarcodeFormat? format;
 
+  /// The origin source of the scan result (the instance of the scanner that scanned it)
+  final BarcodeScanner? source;
+
   const BarcodeScanResult({
     required this.code,
     required this.format,
+    required this.source,
   });
 
   @override
@@ -74,12 +78,7 @@ class BarcodeScanResult {
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is BarcodeScanResult &&
-          runtimeType == other.runtimeType &&
-          code == other.code &&
-          format == other.format;
+  bool operator ==(Object other) => identical(this, other) || other is BarcodeScanResult && runtimeType == other.runtimeType && code == other.code && format == other.format;
 
   @override
   int get hashCode => code.hashCode ^ format.hashCode;
