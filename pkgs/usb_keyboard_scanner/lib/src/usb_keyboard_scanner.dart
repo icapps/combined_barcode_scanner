@@ -107,9 +107,6 @@ class UsbKeyboardScannerController extends BarcodeScannerController {
   UsbKeyboardScannerController(this._scanner);
 
   @override
-  bool get isSupported => true;
-
-  @override
   void pause() {
     _scanner.pause();
   }
@@ -118,4 +115,7 @@ class UsbKeyboardScannerController extends BarcodeScannerController {
   void start() {
     _scanner.start();
   }
+
+  @override
+  bool get isControllerSupported => true;
 }
