@@ -1,7 +1,8 @@
 # fast_barcode_scanner combined scanner implementation
 
 This implementation of a combined scanner (see https://pub.dev/packages/combined_barcode_scanner)
-uses the https://pub.dev/packages/fast_barcode_scanner package to scan qr codes
+uses the keyboard input to detect scan codes.
+Some external usb scanners are known to use keyboard input to input scan codes. (Eg. Zebra DS2208)
 
 Please follow the installation instructions in https://pub.dev/packages/fast_barcode_scanner and https://pub.dev/packages/combined_barcode_scanner
 
@@ -23,6 +24,6 @@ BarcodeScannerWidget(
       type: CameraType.back,
     ),
   ),
-  scanners: [FastBarcodeScanner()],
+  scanners: [UsbKeyboardScanner()],
 );
 ```
