@@ -8,9 +8,9 @@ class UnitechScannerInterface {
 
   static EventChannel? _eventChannel;
 
-  static Future<bool> get isSupported async {
+  static Future<bool> get isControllerSupported async {
     if (kIsWeb || !Platform.isAndroid) return false;
-    return await _channel.invokeMethod<bool>('isSupported') == true;
+    return await _channel.invokeMethod<bool>('isControllerSupported') == true;
   }
 
   static Stream<String> events() {

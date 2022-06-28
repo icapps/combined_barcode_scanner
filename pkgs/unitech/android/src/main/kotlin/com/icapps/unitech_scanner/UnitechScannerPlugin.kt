@@ -18,7 +18,7 @@ class UnitechScannerPlugin : FlutterPlugin, MethodCallHandler, EventChannel.Stre
     companion object {
         const val COMMAND_CHANNEL = "unitech_scanner"
         const val EVENT_CHANNEL = "unitech_scanner/scan"
-        const val METHOD_IS_SUPPORTED = "isSupported"
+        const val METHOD_IS_SUPPORTED = "isControllerSupported"
         const val METHOD_START_SCAN = "startScan"
         const val METHOD_STOP_SCAN = "stopScan"
         private const val START_SCANSERVICE = "unitech.scanservice.start"

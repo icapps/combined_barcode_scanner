@@ -38,11 +38,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final BarcodeScannerWidgetController _controller;
+  bool _supportsSwitchingCamera = false;
+  bool _supportsSwitchingTorch = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = BarcodeScannerWidgetController(() {});
+    _controller = BarcodeScannerWidgetController();
+    _controller.supportsSwitchingCamera
+        .then((value) => setState(() => _supportsSwitchingCamera = value));
+    _controller.supportsSwitchingTorch
+        .then((value) => setState(() => _supportsSwitchingTorch = value));
   }
 
   @override
@@ -57,27 +63,57 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: BarcodeScannerWidget(
-        controller: _controller,
-        onScan: (code) {
-          print("GOT BARCODE =========== ${code.code}");
-        },
-        configuration: const ScannerConfiguration(
-          enableFormats: {BarcodeFormat.qr, BarcodeFormat.code128},
-          cameraConfiguration: CameraConfiguration(
-            frameRate: 30,
-            mode: BarcodeDetectionMode.continuous,
-            resolution: CameraResolution.medium,
-            type: CameraType.back,
+      body: Column(
+        children: [
+          Expanded(
+            child: BarcodeScannerWidget(
+              controller: _controller,
+              onScan: (code) {
+                print("GOT BARCODE =========== ${code.code}");
+              },
+              configuration: const ScannerConfiguration(
+                enableFormats: {
+                  BarcodeFormat.qr,
+                  BarcodeFormat.code128,
+                },
+                cameraConfiguration: CameraConfiguration(
+                  frameRate: 30,
+                  mode: BarcodeDetectionMode.continuous,
+                  resolution: CameraResolution.medium,
+                  type: CameraType.back,
+                ),
+              ),
+              scanners: [
+                FastBarcodeScanner(),
+                HoneywellBarcodeScanner(),
+                UnitechBarcodeScanner(),
+                BlueBirdBarcodeScanner(),
+                ZebraBarcodeScanner('my_profile'),
+                UsbKeyboardScanner(),
+              ],
+            ),
           ),
-        ),
-        scanners: [
-          FastBarcodeScanner(),
-          HoneywellBarcodeScanner(),
-          UnitechBarcodeScanner(),
-          BlueBirdBarcodeScanner(),
-          ZebraBarcodeScanner('my_profile'),
-          UsbKeyboardScanner(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (_supportsSwitchingTorch) ...[
+                MaterialButton(
+                  child: Icon(
+                      _controller.isTorchOn ? Icons.flash_off : Icons.flash_on),
+                  onPressed: () {
+                    _controller.toggleTorch();
+                    setState(() {});
+                  },
+                ),
+              ],
+              if (_supportsSwitchingCamera) ...[
+                MaterialButton(
+                  child: Icon(Icons.flip_camera_ios),
+                  onPressed: _controller.toggleCamera,
+                ),
+              ],
+            ],
+          ),
         ],
       ),
     );

@@ -29,7 +29,7 @@ class UnitechBarcodeScanner implements BarcodeScanner {
     required ScannerConfiguration configuration,
     required ValueChanged<BarcodeScanResult> onScan,
   }) async {
-    _supported = await _controller.isSupported;
+    _supported = await _controller.isControllerSupported;
     _controller.scannerCallBack = _ScannerWrapper(onScan);
     controller = _UnitechController(_controller, enabled: _supported);
   }
@@ -77,9 +77,12 @@ class _ScannerWrapper implements UnitechScannerCallBack {
   void onError(Exception error) {}
 }
 
-class _UnitechController implements BarcodeScannerController {
+class _UnitechController extends BarcodeScannerController {
   final UnitechScannerController _scanner;
   final bool enabled;
+
+  @override
+  bool get isControllerSupported => enabled;
 
   _UnitechController(
     this._scanner, {

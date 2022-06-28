@@ -68,7 +68,10 @@ class FastBarcodeScanner implements BarcodeScanner {
   late BarcodeScannerController controller;
 }
 
-class FastBarcodeScannerController implements BarcodeScannerController {
+class FastBarcodeScannerController extends BarcodeScannerController {
+  @override
+  bool get isControllerSupported => true;
+
   @override
   void pause() {
     fbs.CameraController.instance.pauseDetector();
@@ -78,6 +81,19 @@ class FastBarcodeScannerController implements BarcodeScannerController {
   void start() {
     fbs.CameraController.instance.resumeDetector();
   }
+
+  @override
+  Future<bool> get supportsSwitchingCamera =>
+      fbs.CameraController.instance.canChangeCamera();
+
+  @override
+  Future<void> toggleCamera() => fbs.CameraController.instance.toggleCamera();
+
+  @override
+  Future<void> toggleTorch() => fbs.CameraController.instance.toggleTorch();
+
+  @override
+  bool get isTorchOn => fbs.CameraController.instance.state.torchState;
 }
 
 BarcodeScanResult _mapBarcode(fbs.Barcode code) {

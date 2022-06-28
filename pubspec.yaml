@@ -11,6 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  torch_compat:
+    git:
+      url: https://github.com/icapps/flutter_torch_compat
+      ref: 2838bf2dac168937ad19ed4301633c320b4aa4c0
 
 dev_dependencies:
   flutter_test:

@@ -25,7 +25,7 @@ class ZebraPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler
         const val INTENT_ACTION_SCAN = "com.icapps.zebra.SCAN"
 
         const val METHOD_GET_PROFILES = "getProfiles"
-        const val METHOD_IS_SUPPORTED = "isSupported"
+        const val METHOD_IS_SUPPORTED = "isControllerSupported"
         const val METHOD_CREATE_PROFILE = "createProfile"
         const val ARGUMENT_PROFILE_NAME = "profileName"
         const val METHOD_START_SCAN = "startScan"

@@ -14,7 +14,8 @@ class UnitechScannerController {
 
   UnitechScannerController();
 
-  Future<bool> get isSupported => UnitechScannerInterface.isSupported;
+  Future<bool> get isControllerSupported =>
+      UnitechScannerInterface.isControllerSupported;
 
   Future<bool> init() async {
     return Future.value(true);

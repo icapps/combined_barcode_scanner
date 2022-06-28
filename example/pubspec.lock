@@ -51,12 +51,12 @@ packages:
     source: hosted
     version: "1.15.0"
   combined_barcode_scanner:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: combined_barcode_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1-dev.1"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1-dev.2"
   combined_barcode_scanner_blue_bird:
     dependency: "direct main"
     description:
@@ -116,16 +116,20 @@ packages:
   fast_barcode_scanner:
     dependency: "direct main"
     description:
-      name: fast_barcode_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: fast_barcode_scanner
+      ref: HEAD
+      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
+      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
+    source: git
     version: "1.1.4"
   fast_barcode_scanner_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: fast_barcode_scanner_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: fast_barcode_scanner_platform_interface
+      ref: HEAD
+      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
+      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
+    source: git
     version: "1.0.4"
   flutter:
     dependency: "direct main"
@@ -240,6 +244,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.8"
+  torch_compat:
+    dependency: transitive
+    description:
+      path: "."
+      ref: "2838bf2dac168937ad19ed4301633c320b4aa4c0"
+      resolved-ref: "2838bf2dac168937ad19ed4301633c320b4aa4c0"
+      url: "https://github.com/icapps/flutter_torch_compat"
+    source: git
+    version: "1.1.2"
   typed_data:
     dependency: transitive
     description:
