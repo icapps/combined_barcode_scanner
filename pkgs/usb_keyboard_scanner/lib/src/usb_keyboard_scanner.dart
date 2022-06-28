@@ -65,7 +65,6 @@ class UsbKeyboardScanner implements BarcodeScanner {
   static const debounceMillis = 50;
 
   void _onKeyEvent(KeyEvent event) {
-    //nice to have: feedback die aangeeft dat de scan niet wordt geaccepteerd -> scanner beept altijd als er iets gelezen wordt
     if (event.character != null && event.character!.isNotEmpty) {
       externalScanString += event.character!;
     }
