@@ -64,7 +64,7 @@ class BarcodeScanResult {
   final BarcodeFormat? format;
 
   /// The origin source of the scan result (the instance of the scanner that scanned it)
-  final BarcodeScanner? source;
+  final ScannerType source;
 
   const BarcodeScanResult({
     required this.code,
@@ -87,6 +87,7 @@ class BarcodeScanResult {
     return <String, dynamic>{
       'code': code,
       'format': format?.index,
+      'source': source.string,
     };
   }
 
@@ -96,6 +97,7 @@ class BarcodeScanResult {
     return BarcodeScanResult(
       code: map['code'] as String,
       format: format,
+      source: (map['source'] as String).scannerType,
     );
   }
 }

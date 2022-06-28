@@ -1,6 +1,6 @@
 ## 0.0.1-dev.2
 
-* Add source to BarcodeScanResult
+* Add ScannerType source to BarcodeScanResult
 
 ## 0.0.1-dev.1
 
