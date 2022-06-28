@@ -1,7 +1,7 @@
 enum ScannerType {
   unknown,
   bluebird,
-  fastBarcode,
+  camera,
   honeywell,
   unitech,
   usbKeyboard,
@@ -13,8 +13,8 @@ extension ScannerTypeStringExtension on String {
     switch (this) {
       case 'bluebird':
         return ScannerType.bluebird;
-      case 'fastBarcode':
-        return ScannerType.fastBarcode;
+      case 'camera':
+        return ScannerType.camera;
       case 'honeywell':
         return ScannerType.honeywell;
       case 'unitech':
@@ -35,8 +35,8 @@ extension ScannerTypeExtension on ScannerType {
     switch (this) {
       case ScannerType.bluebird:
         return 'bluebird';
-      case ScannerType.fastBarcode:
-        return 'fastBarcode';
+      case ScannerType.camera:
+        return 'camera';
       case ScannerType.honeywell:
         return 'honeywell';
       case ScannerType.unitech:
