@@ -77,7 +77,7 @@ class UsbKeyboardScanner implements BarcodeScanner {
         //trim spaces, tabs and `null` characters (\u0000)
         final finalScanString = externalScanString.trim().replaceAll('\u0000', '');
         externalScanString = '';
-        _onScan(BarcodeScanResult(code: finalScanString, format: null));
+        _onScan(BarcodeScanResult(code: finalScanString, format: null, source: ScannerType.usbKeyboard));
       },
     );
   }
