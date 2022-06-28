@@ -58,15 +58,18 @@ void main() {
       _expectAllowedType(config2.toMap());
     });
     test('Test BarcodeScanResult', () {
-      const result = BarcodeScanResult(code: '123', format: BarcodeFormat.upcA, source: ScannerType.unknown);
+      const result = BarcodeScanResult(
+          code: '123', format: BarcodeFormat.upcA, source: ScannerType.unknown);
       expect(BarcodeScanResult.fromMap(result.toMap()), result);
       _expectAllowedType(result.toMap());
 
-      const result2 = BarcodeScanResult(code: '124', format: BarcodeFormat.qr, source: ScannerType.camera);
+      const result2 = BarcodeScanResult(
+          code: '124', format: BarcodeFormat.qr, source: ScannerType.camera);
       expect(BarcodeScanResult.fromMap(result2.toMap()), result2);
       _expectAllowedType(result2.toMap());
 
-      const result3 = BarcodeScanResult(code: '124', format: null, source: ScannerType.unitech);
+      const result3 = BarcodeScanResult(
+          code: '124', format: null, source: ScannerType.unitech);
       expect(BarcodeScanResult.fromMap(result3.toMap()), result3);
       _expectAllowedType(result3.toMap());
     });
@@ -80,7 +83,11 @@ void _ensureSerializable(Map<String, dynamic> data) {
 }
 
 void _expectAllowedType(dynamic value) {
-  if (value is int || value is String || value is bool || value is double || value == null) {
+  if (value is int ||
+      value is String ||
+      value is bool ||
+      value is double ||
+      value == null) {
     //Ok
   } else if (value is Map) {
     _ensureSerializable(value as Map<String, dynamic>);

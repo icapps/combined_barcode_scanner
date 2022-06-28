@@ -13,7 +13,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
   late FocusNode _focusNode;
 
   @override
-  Widget? buildUI(ScannerConfiguration configuration, BuildContext context) => KeyboardListener(
+  Widget? buildUI(ScannerConfiguration configuration, BuildContext context) =>
+      KeyboardListener(
         focusNode: _focusNode,
         autofocus: true,
         onKeyEvent: _onKeyEvent,
@@ -74,7 +75,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
       const Duration(milliseconds: debounceMillis),
       () async {
         //trim spaces, tabs and `null` characters (\u0000)
-        final finalScanString = externalScanString.trim().replaceAll('\u0000', '');
+        final finalScanString =
+            externalScanString.trim().replaceAll('\u0000', '');
         externalScanString = '';
         _onScan(BarcodeScanResult(code: finalScanString, format: null));
       },

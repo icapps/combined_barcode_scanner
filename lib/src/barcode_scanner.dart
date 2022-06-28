@@ -79,7 +79,12 @@ class BarcodeScanResult {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is BarcodeScanResult && runtimeType == other.runtimeType && code == other.code && format == other.format && source == other.source;
+      identical(this, other) ||
+      other is BarcodeScanResult &&
+          runtimeType == other.runtimeType &&
+          code == other.code &&
+          format == other.format &&
+          source == other.source;
 
   @override
   int get hashCode => code.hashCode ^ format.hashCode ^ source.hashCode;
