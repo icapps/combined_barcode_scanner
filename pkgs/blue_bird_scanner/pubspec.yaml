@@ -31,9 +31,4 @@ dependency_overrides:
       url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
       path: fast_barcode_scanner_platform_interface
 
-## snippet used for testing changes in combined_barcode_scanner during development:
-#dependency_overrides:
-#  combined_barcode_scanner:
-#    path: ../..
-
 flutter:

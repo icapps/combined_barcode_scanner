@@ -12,6 +12,12 @@ class UsbKeyboardScanner implements BarcodeScanner {
   late ValueChanged<BarcodeScanResult> _onScan;
   late FocusNode _focusNode;
 
+  Timer? _debounceTimer;
+  String _externalScanString = '';
+  static const debounceMillis = 50;
+
+  var isRunning = true;
+
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) =>
       KeyboardListener(
@@ -28,6 +34,7 @@ class UsbKeyboardScanner implements BarcodeScanner {
   }) {
     _onScan = onScan;
     _focusNode = FocusNode();
+    controller = UsbKeyboardScannerController(this);
     // ignore: void_checks
     return SynchronousFuture(1);
   }
@@ -59,15 +66,11 @@ class UsbKeyboardScanner implements BarcodeScanner {
   @override
   late BarcodeScannerController controller;
 
-  Timer? _debounceTimer;
-
-  String externalScanString = '';
-
-  static const debounceMillis = 50;
-
   void _onKeyEvent(KeyEvent event) {
+    if (!isRunning) return;
+
     if (event.character != null && event.character!.isNotEmpty) {
-      externalScanString += event.character!;
+      _externalScanString += event.character!;
     }
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer?.cancel();
@@ -76,8 +79,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
       () async {
         //trim spaces, tabs and `null` characters (\u0000)
         final finalScanString =
-            externalScanString.trim().replaceAll('\u0000', '');
-        externalScanString = '';
+            _externalScanString.trim().replaceAll('\u0000', '');
+        _externalScanString = '';
         _onScan(
           BarcodeScanResult(
             code: finalScanString,
@@ -87,5 +90,32 @@ class UsbKeyboardScanner implements BarcodeScanner {
         );
       },
     );
+  }
+
+  void pause() {
+    isRunning = false;
+  }
+
+  void start() {
+    isRunning = true;
+  }
+}
+
+class UsbKeyboardScannerController extends BarcodeScannerController {
+  final UsbKeyboardScanner _scanner;
+
+  UsbKeyboardScannerController(this._scanner);
+
+  @override
+  bool get isSupported => true;
+
+  @override
+  void pause() {
+    _scanner.pause();
+  }
+
+  @override
+  void start() {
+    _scanner.start();
   }
 }
