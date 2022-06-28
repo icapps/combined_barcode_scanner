@@ -62,11 +62,11 @@ void main() {
       expect(BarcodeScanResult.fromMap(result.toMap()), result);
       _expectAllowedType(result.toMap());
 
-      const result2 = BarcodeScanResult(code: '124', format: BarcodeFormat.qr, source: ScannerType.unknown);
+      const result2 = BarcodeScanResult(code: '124', format: BarcodeFormat.qr, source: ScannerType.camera);
       expect(BarcodeScanResult.fromMap(result2.toMap()), result2);
       _expectAllowedType(result2.toMap());
 
-      const result3 = BarcodeScanResult(code: '124', format: null, source: ScannerType.unknown);
+      const result3 = BarcodeScanResult(code: '124', format: null, source: ScannerType.unitech);
       expect(BarcodeScanResult.fromMap(result3.toMap()), result3);
       _expectAllowedType(result3.toMap());
     });
