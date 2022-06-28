@@ -96,21 +96,22 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              if (_supportsSwitchingTorch)
+              if (_supportsSwitchingTorch) ...[
                 MaterialButton(
-                  child: Icon(_controller.torchState
-                      ? Icons.flash_off
-                      : Icons.flash_on),
+                  child: Icon(
+                      _controller.isTorchOn ? Icons.flash_off : Icons.flash_on),
                   onPressed: () {
                     _controller.toggleTorch();
                     setState(() {});
                   },
                 ),
-              if (_supportsSwitchingCamera)
+              ],
+              if (_supportsSwitchingCamera) ...[
                 MaterialButton(
                   child: Icon(Icons.flip_camera_ios),
                   onPressed: _controller.toggleCamera,
                 ),
+              ],
             ],
           ),
         ],

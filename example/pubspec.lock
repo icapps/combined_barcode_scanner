@@ -56,7 +56,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1-dev.1"
+    version: "0.0.1-dev.2"
   combined_barcode_scanner_blue_bird:
     dependency: "direct main"
     description:
@@ -118,8 +118,8 @@ packages:
     description:
       path: fast_barcode_scanner
       ref: HEAD
-      resolved-ref: "8f5c69acfb58692bc8f232d74923cdc3aaebb704"
-      url: "git://github.com/ikbendewilliam/fast_barcode_scanner.git"
+      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
+      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
     source: git
     version: "1.1.4"
   fast_barcode_scanner_platform_interface:
@@ -127,8 +127,8 @@ packages:
     description:
       path: fast_barcode_scanner_platform_interface
       ref: HEAD
-      resolved-ref: "8f5c69acfb58692bc8f232d74923cdc3aaebb704"
-      url: "git://github.com/ikbendewilliam/fast_barcode_scanner.git"
+      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
+      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
     source: git
     version: "1.0.4"
   flutter:

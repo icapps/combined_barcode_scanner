@@ -19,8 +19,9 @@ class ZebraDataWedgeController {
 
   ZebraDataWedgeController();
 
-  Future<bool> get isSupported async =>
-      (!kIsWeb && Platform.isAndroid) && await ZebraInterface.isSupported;
+  Future<bool> get isControllerSupported async =>
+      (!kIsWeb && Platform.isAndroid) &&
+      await ZebraInterface.isControllerSupported;
 
   Future<bool> init(String profileName, List<String> supportedFormats) async {
     if (!(await ZebraInterface.profiles).contains(profileName)) {

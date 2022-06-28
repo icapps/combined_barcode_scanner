@@ -32,8 +32,7 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
       _scanner.scannerCallBack = _ScannerWrapper(onScan);
 
       final properties = <String, dynamic>{
-        ...CodeFormatUtils.getAsPropertiesComplement(
-            _makeFormats(configuration.enableFormats)),
+        ...CodeFormatUtils.getAsPropertiesComplement(_makeFormats(configuration.enableFormats)),
       };
       await _scanner.setProperties(properties);
     }
@@ -49,8 +48,7 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
   }
 
   @override
-  final ScannerProperties properties =
-      const ScannerProperties(hasUI: false, supportedFormats: {
+  final ScannerProperties properties = const ScannerProperties(hasUI: false, supportedFormats: {
     BarcodeFormat.codabar,
     BarcodeFormat.code39,
     BarcodeFormat.code93,
@@ -74,7 +72,7 @@ class _HoneyWellController extends BarcodeScannerController {
   final bool enabled;
 
   @override
-  bool get isSupported => enabled;
+  bool get isControllerSupported => enabled;
 
   _HoneyWellController(
     this._scanner, {
