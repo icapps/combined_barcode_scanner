@@ -16,13 +16,7 @@ BarcodeScannerWidget(
     }
   },
   configuration: const ScannerConfiguration(
-    enableFormats: {BarcodeFormat.qr},
-    cameraConfiguration: CameraConfiguration(
-      frameRate: 30,
-      mode: BarcodeDetectionMode.continuous,
-      resolution: CameraResolution.medium,
-      type: CameraType.back,
-    ),
+    enableFormats: {}, // supported formats are determined by the scanner itself
   ),
   scanners: [UsbKeyboardScanner()],
 );
