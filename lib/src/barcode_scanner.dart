@@ -63,7 +63,7 @@ class BarcodeScanResult {
   /// The format of the barcode if reported by the library
   final BarcodeFormat? format;
 
-  /// The origin source of the scan result (the instance of the scanner that scanned it)
+  /// The origin source of the scan result
   final ScannerType source;
 
   const BarcodeScanResult({
