@@ -83,9 +83,12 @@ class _ScannerWrapper implements UnitechScannerCallBack {
   void onError(Exception error) {}
 }
 
-class _UnitechController implements BarcodeScannerController {
+class _UnitechController extends BarcodeScannerController {
   final UnitechScannerController _scanner;
   final bool enabled;
+
+  @override
+  bool get isSupported => enabled;
 
   _UnitechController(
     this._scanner, {

@@ -18,6 +18,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  
+dependency_overrides:
+  combined_barcode_scanner:
+    path: ../../
+  fast_barcode_scanner:
+    git:
+      url: git://github.com/ikbendewilliam/fast_barcode_scanner.git
+      path: fast_barcode_scanner
+  fast_barcode_scanner_platform_interface:
+    git:
+      url: git://github.com/ikbendewilliam/fast_barcode_scanner.git
+      path: fast_barcode_scanner_platform_interface
 
 ## snippet used for testing changes in combined_barcode_scanner during development:
 #dependency_overrides:

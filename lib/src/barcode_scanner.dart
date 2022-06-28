@@ -43,6 +43,20 @@ abstract class BarcodeScanner {
 
 /// Controller interface for [BarcodeScanner]
 abstract class BarcodeScannerController {
+  /// Whether the device can switch between cameras (for example front vs back)
+  Future<bool> get supportsSwitchingCamera async => false;
+
+  bool get isSupported;
+
+  /// Whether the device has a torch that is on
+  bool get torchState => false;
+
+  /// Switch between cameras (if supported. see [supportsSwitchingCamera])
+  Future<void> toggleCamera() async {}
+
+  /// Switch the torch on/off (see [torchState] for current state)
+  Future<void> toggleTorch() async {}
+
   /// Starts the scanner if it is not running
   void start();
 

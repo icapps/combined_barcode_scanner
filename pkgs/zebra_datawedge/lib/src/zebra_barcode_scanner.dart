@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/scan_callback.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/zebra_datawedge_controller.dart';
@@ -45,7 +47,7 @@ class ZebraBarcodeScanner implements BarcodeScanner {
           profileName, _mapFormats(configuration.enableFormats));
       _controller.scannerCallBack = _ScannerWrapper(onScan);
     }
-    controller = _ZebraController(_controller, enabled: _supported);
+    controller = _ZebraController(_controller, enabled: _supported)..start();
   }
 
   @override
@@ -100,9 +102,12 @@ class _ScannerWrapper implements ScannerCallBack {
   void onError(Exception error) {}
 }
 
-class _ZebraController implements BarcodeScannerController {
+class _ZebraController extends BarcodeScannerController {
   final ZebraDataWedgeController _scanner;
   final bool enabled;
+
+  @override
+  bool get isSupported => enabled;
 
   _ZebraController(
     this._scanner, {

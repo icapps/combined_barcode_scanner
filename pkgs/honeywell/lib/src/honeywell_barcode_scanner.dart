@@ -69,9 +69,12 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
   });
 }
 
-class _HoneyWellController implements BarcodeScannerController {
+class _HoneyWellController extends BarcodeScannerController {
   final HoneywellScanner _scanner;
   final bool enabled;
+
+  @override
+  bool get isSupported => enabled;
 
   _HoneyWellController(
     this._scanner, {

@@ -9,7 +9,7 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  combined_barcode_scanner: ^0.0.1-dev.2
+  combined_barcode_scanner: ^0.0.1-dev.1
   fast_barcode_scanner: 1.1.4
   flutter:
     sdk: flutter
@@ -19,9 +19,16 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^1.0.0
 
-## snippet used for testing changes in combined_barcode_scanner during development:
-#dependency_overrides:
-#  combined_barcode_scanner:
-#    path: ../..
+dependency_overrides:
+  combined_barcode_scanner:
+    path: ../../
+  fast_barcode_scanner:
+    git:
+      url: git://github.com/ikbendewilliam/fast_barcode_scanner.git
+      path: fast_barcode_scanner
+  fast_barcode_scanner_platform_interface:
+    git:
+      url: git://github.com/ikbendewilliam/fast_barcode_scanner.git
+      path: fast_barcode_scanner_platform_interface
 
 flutter:
