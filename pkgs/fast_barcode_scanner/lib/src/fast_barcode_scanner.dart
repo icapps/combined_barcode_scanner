@@ -19,7 +19,8 @@ class FastBarcodeScanner implements BarcodeScanner {
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) {
-    final cameraConfig = configuration.cameraConfiguration ?? _defaultCameraConfig;
+    final cameraConfig =
+        configuration.cameraConfiguration ?? _defaultCameraConfig;
     return fbs.BarcodeCamera(
       types: _mapTypes(configuration.enableFormats),
       resolution: _mapResolution(cameraConfig.resolution),
@@ -83,7 +84,7 @@ BarcodeScanResult _mapBarcode(fbs.Barcode code) {
   return BarcodeScanResult(
     code: code.value,
     format: _mapFastToType(code.type),
-    source: ScannerType.fastBarcode,
+    source: ScannerType.camera,
   );
 }
 
@@ -114,7 +115,8 @@ BarcodeFormat _mapFastToType(fbs.BarcodeType type) {
     case fbs.BarcodeType.upcE:
       return BarcodeFormat.upcE;
     default:
-      throw ArgumentError('Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
+      throw ArgumentError(
+          'Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
   }
 }
 

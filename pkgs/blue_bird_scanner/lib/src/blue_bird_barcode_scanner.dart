@@ -48,7 +48,8 @@ class BlueBirdBarcodeScanner implements BarcodeScanner {
   }
 
   @override
-  final ScannerProperties properties = const ScannerProperties(hasUI: false, supportedFormats: {
+  final ScannerProperties properties =
+      const ScannerProperties(hasUI: false, supportedFormats: {
     BarcodeFormat.codabar,
     BarcodeFormat.code39,
     BarcodeFormat.code93,
@@ -99,7 +100,13 @@ class _ScannerWrapper implements ScannerCallBack {
   @override
   void onDecoded(String? result) {
     if (result != null) {
-      onScan(BarcodeScanResult(code: result, format: null, source: ScannerType.bluebird));
+      onScan(
+        BarcodeScanResult(
+          code: result,
+          format: null,
+          source: ScannerType.bluebird,
+        ),
+      );
     }
   }
 

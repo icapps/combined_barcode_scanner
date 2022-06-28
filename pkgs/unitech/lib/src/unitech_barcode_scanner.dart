@@ -69,7 +69,13 @@ class _ScannerWrapper implements UnitechScannerCallBack {
   @override
   void onDecoded(String? result) {
     if (result != null) {
-      onScan(BarcodeScanResult(code: result, format: null, source: ScannerType.unitech));
+      onScan(
+        BarcodeScanResult(
+          code: result,
+          format: null,
+          source: ScannerType.unitech,
+        ),
+      );
     }
   }
 

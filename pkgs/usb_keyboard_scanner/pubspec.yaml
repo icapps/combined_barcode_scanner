@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+## snippet used for testing changes in combined_barcode_scanner during development:
 #dependency_overrides:
 #  combined_barcode_scanner:
 #    path: ../..

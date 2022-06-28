@@ -32,7 +32,8 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
       _scanner.scannerCallBack = _ScannerWrapper(onScan);
 
       final properties = <String, dynamic>{
-        ...CodeFormatUtils.getAsPropertiesComplement(_makeFormats(configuration.enableFormats)),
+        ...CodeFormatUtils.getAsPropertiesComplement(
+            _makeFormats(configuration.enableFormats)),
       };
       await _scanner.setProperties(properties);
     }
@@ -48,7 +49,8 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
   }
 
   @override
-  final ScannerProperties properties = const ScannerProperties(hasUI: false, supportedFormats: {
+  final ScannerProperties properties =
+      const ScannerProperties(hasUI: false, supportedFormats: {
     BarcodeFormat.codabar,
     BarcodeFormat.code39,
     BarcodeFormat.code93,
@@ -103,7 +105,13 @@ class _ScannerWrapper implements ScannerCallBack {
   @override
   void onDecoded(String? result) {
     if (result != null) {
-      onScan(BarcodeScanResult(code: result, format: null, source: ScannerType.honeywell));
+      onScan(
+        BarcodeScanResult(
+          code: result,
+          format: null,
+          source: ScannerType.honeywell,
+        ),
+      );
     }
   }
 
