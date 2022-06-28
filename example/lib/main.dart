@@ -3,6 +3,7 @@ import 'package:combined_barcode_scanner_blue_bird/combined_barcode_scanner_blue
 import 'package:combined_barcode_scanner_fast/combined_barcode_scanner_fast.dart';
 import 'package:combined_barcode_scanner_honeywell/combined_barcode_scanner_honeywell.dart';
 import 'package:combined_barcode_scanner_unitech/combined_barcode_scanner_unitech.dart';
+import 'package:combined_barcode_scanner_usb_keyboard/combined_barcode_scanner_usb_keyboard.dart';
 import 'package:combined_barcode_scanner_zebra/combined_barcode_scanner_zebra.dart';
 import 'package:flutter/material.dart';
 
@@ -88,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 UnitechBarcodeScanner(),
                 BlueBirdBarcodeScanner(),
                 ZebraBarcodeScanner('my_profile'),
+                UsbKeyboardScanner(),
               ],
             ),
           ),

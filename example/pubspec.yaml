@@ -21,6 +21,8 @@ dependencies:
     path: ../pkgs/zebra_datawedge
   combined_barcode_scanner_blue_bird:
     path: ../pkgs/blue_bird_scanner
+  combined_barcode_scanner_usb_keyboard:
+    path: ../pkgs/usb_keyboard_scanner
 
 dev_dependencies:
   flutter_test:

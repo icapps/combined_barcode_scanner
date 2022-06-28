@@ -77,9 +77,13 @@ class BarcodeScanResult {
   /// The format of the barcode if reported by the library
   final BarcodeFormat? format;
 
+  /// The origin source of the scan result
+  final ScannerType source;
+
   const BarcodeScanResult({
     required this.code,
     required this.format,
+    required this.source,
   });
 
   @override
@@ -93,15 +97,17 @@ class BarcodeScanResult {
       other is BarcodeScanResult &&
           runtimeType == other.runtimeType &&
           code == other.code &&
-          format == other.format;
+          format == other.format &&
+          source == other.source;
 
   @override
-  int get hashCode => code.hashCode ^ format.hashCode;
+  int get hashCode => code.hashCode ^ format.hashCode ^ source.hashCode;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'code': code,
       'format': format?.index,
+      'source': source.string,
     };
   }
 
@@ -111,6 +117,7 @@ class BarcodeScanResult {
     return BarcodeScanResult(
       code: map['code'] as String,
       format: format,
+      source: (map['source'] as String).scannerType,
     );
   }
 }
