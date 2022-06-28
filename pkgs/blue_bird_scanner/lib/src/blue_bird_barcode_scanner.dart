@@ -73,7 +73,7 @@ class _BlueBirdController extends BarcodeScannerController {
   final bool enabled;
 
   @override
-  bool get isSupported => enabled;
+  bool get isControllerSupported => enabled;
 
   _BlueBirdController(
     this._scanner, {

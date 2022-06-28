@@ -1,6 +1,6 @@
 ## 0.0.1-dev.2
 
-* Added toggleTorch, torchState, toggleCamera and supportsSwitchingCamera
+* Added toggleTorch, isTorchOn, toggleCamera and supportsSwitchingCamera
 * Added method `supportsScanner<T extends BarcodeScanner>()` to check if certain scanner is supported on the device
 * Fix issue where zebra didn't work on the second run
 * Add ScannerType source to BarcodeScanResult

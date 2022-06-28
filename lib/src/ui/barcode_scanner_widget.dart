@@ -15,7 +15,7 @@ class BarcodeScannerWidgetController {
   VoidCallback? onScannersConfigured;
   VoidCallback? _onStartListener;
   VoidCallback? _onEndListener;
-  BoolCallback? _onTorchStateListener;
+  BoolCallback? _onIsTorchOnListener;
   AsyncCallback? _onToggleTorchListener;
   AsyncCallback? _onToggleCameraListener;
   AsyncBoolCallback? _onSupportsSwitchingCameraListener;
@@ -38,12 +38,12 @@ class BarcodeScannerWidgetController {
       await TorchCompat.hasTorch ?? false;
 
   /// Whether the device has a torch that is on
-  bool get torchState => _onTorchStateListener?.call() ?? false;
+  bool get isTorchOn => _onIsTorchOnListener?.call() ?? false;
 
   /// Switch between cameras (if supported. see [supportsSwitchingCamera])
   Future<void> toggleCamera() async => _onToggleCameraListener?.call();
 
-  /// Switch the torch on/off (see [torchState] for current state)
+  /// Switch the torch on/off (see [isTorchOn] for current state)
   Future<void> toggleTorch() async => _onToggleTorchListener?.call();
 
   /// Whether the scanner type is supported
@@ -60,7 +60,7 @@ class BarcodeScannerWidgetController {
     _onStartListener = null;
     _onEndListener = null;
     _onSupportsSwitchingCameraListener = null;
-    _onTorchStateListener = null;
+    _onIsTorchOnListener = null;
     _onToggleCameraListener = null;
     _onToggleTorchListener = null;
     _onSupportScannerListener = null;
@@ -108,7 +108,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     .._onStartListener = _startCalled
     .._onEndListener = _endCalled
     .._onSupportsSwitchingCameraListener = _onSupportsSwitchingCameraListener
-    .._onTorchStateListener = _onTorchStateListener
+    .._onIsTorchOnListener = _onIsTorchOnListener
     .._onToggleCameraListener = _onToggleCameraListener
     .._onToggleTorchListener = _onToggleTorchListener
     .._onSupportScannerListener = _onSupportScannerListener;
@@ -117,6 +117,9 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   void didUpdateWidget(BarcodeScannerWidget oldWidget) {
     if (!identical(oldWidget.controller, widget.controller)) {
       oldWidget.controller._clearListeners();
+      widget.controller
+        .._onStartListener = _startCalled
+        .._onStartListener = _endCalled;
     }
     // If the configuration changes, we need to rebuild all scanners.
     // Wait for the previous configuration to finish first before calling
@@ -178,8 +181,8 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     return false;
   }
 
-  bool _onTorchStateListener() => _configuredScanners
-      .any((element) => element?.controller.torchState ?? false);
+  bool _onIsTorchOnListener() => _configuredScanners
+      .any((element) => element?.controller.isTorchOn ?? false);
 
   Future<void> _onToggleCameraListener() async {
     for (final value in _configuredScanners) {
@@ -193,14 +196,16 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   bool _onSupportScannerListener<T extends BarcodeScanner>() {
     return _configuredScanners
         .whereType<T>()
-        .any((element) => element.controller.isSupported);
+        .any((element) => element.controller.isControllerSupported);
   }
 
   Future<void> _onToggleTorchListener() async {
     for (final value in _configuredScanners) {
-      final state = value?.controller.torchState;
-      await value?.controller.toggleTorch();
-      if (state != value?.controller.torchState) return;
+      final controller = value?.controller;
+      if (controller == null) continue;
+      final state = controller.isTorchOn;
+      await controller.toggleTorch();
+      if (state != controller.isTorchOn) return;
     }
   }
 

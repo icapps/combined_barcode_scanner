@@ -27,7 +27,7 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
     required ScannerConfiguration configuration,
     required ValueChanged<BarcodeScanResult> onScan,
   }) async {
-    _supported = await _scanner.isSupported();
+    _supported = await _scanner.isControllerSupported();
     if (_supported) {
       _scanner.scannerCallBack = _ScannerWrapper(onScan);
 
@@ -74,7 +74,7 @@ class _HoneyWellController extends BarcodeScannerController {
   final bool enabled;
 
   @override
-  bool get isSupported => enabled;
+  bool get isControllerSupported => enabled;
 
   _HoneyWellController(
     this._scanner, {

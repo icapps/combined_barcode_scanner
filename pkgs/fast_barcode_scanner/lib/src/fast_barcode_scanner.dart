@@ -70,7 +70,7 @@ class FastBarcodeScanner implements BarcodeScanner {
 
 class FastBarcodeScannerController extends BarcodeScannerController {
   @override
-  bool get isSupported => true;
+  bool get isControllerSupported => true;
 
   @override
   void pause() {
@@ -93,7 +93,7 @@ class FastBarcodeScannerController extends BarcodeScannerController {
   Future<void> toggleTorch() => fbs.CameraController.instance.toggleTorch();
 
   @override
-  bool get torchState => fbs.CameraController.instance.state.torchState;
+  bool get isTorchOn => fbs.CameraController.instance.state.torchState;
 }
 
 BarcodeScanResult _mapBarcode(fbs.Barcode code) {
