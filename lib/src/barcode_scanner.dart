@@ -78,10 +78,16 @@ class BarcodeScanResult {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is BarcodeScanResult && runtimeType == other.runtimeType && code == other.code && format == other.format;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BarcodeScanResult &&
+          runtimeType == other.runtimeType &&
+          code == other.code &&
+          format == other.format &&
+          source == other.source;
 
   @override
-  int get hashCode => code.hashCode ^ format.hashCode;
+  int get hashCode => code.hashCode ^ format.hashCode ^ source.hashCode;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
