@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 /// Please follow the installation instructions in
 /// [https://pub.dev/packages/fast_barcode_scanner]
 class UsbKeyboardScanner implements BarcodeScanner {
+  static const _debounceMillis = 50;
+
   late ValueChanged<BarcodeScanResult> _onScan;
   late FocusNode _focusNode;
-
   Timer? _debounceTimer;
   String _externalScanString = '';
-  static const debounceMillis = 50;
 
   var isRunning = true;
 
@@ -30,12 +30,10 @@ class UsbKeyboardScanner implements BarcodeScanner {
   Future<void> configure({
     required ScannerConfiguration configuration,
     required ValueChanged<BarcodeScanResult> onScan,
-  }) {
+  }) async {
     controller = UsbKeyboardScannerController(this);
     _onScan = onScan;
     _focusNode = FocusNode();
-    // ignore: void_checks
-    return SynchronousFuture(1);
   }
 
   @override
@@ -74,7 +72,7 @@ class UsbKeyboardScanner implements BarcodeScanner {
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer?.cancel();
     _debounceTimer = Timer(
-      const Duration(milliseconds: debounceMillis),
+      const Duration(milliseconds: _debounceMillis),
       () async {
         //trim spaces, tabs and `null` characters (\u0000)
         final finalScanString = _externalScanString.trim().replaceAll('\u0000', '');
