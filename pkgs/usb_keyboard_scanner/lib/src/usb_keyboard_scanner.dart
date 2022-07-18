@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Barcode scanner implementation that uses the fast_barcode_scanner library.
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 /// Please follow the installation instructions in
 /// [https://pub.dev/packages/fast_barcode_scanner]
 class UsbKeyboardScanner implements BarcodeScanner {
-  static const _debounceMillis = 50;
+  int maxCharacterInputIntervalMs;
 
   late ValueChanged<BarcodeScanResult> _onScan;
   late FocusNode _focusNode;
@@ -17,6 +16,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
   String _externalScanString = '';
 
   var isRunning = true;
+
+  UsbKeyboardScanner({this.maxCharacterInputIntervalMs = 50});
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) => KeyboardListener(
@@ -72,7 +73,7 @@ class UsbKeyboardScanner implements BarcodeScanner {
 
     if (_debounceTimer?.isActive ?? false) _debounceTimer?.cancel();
     _debounceTimer = Timer(
-      const Duration(milliseconds: _debounceMillis),
+      Duration(milliseconds: maxCharacterInputIntervalMs),
       () async {
         //trim spaces, tabs and `null` characters (\u0000)
         final finalScanString = _externalScanString.trim().replaceAll('\u0000', '');
