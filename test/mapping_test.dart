@@ -59,17 +59,26 @@ void main() {
     });
     test('Test BarcodeScanResult', () {
       const result = BarcodeScanResult(
-          code: '123', format: BarcodeFormat.upcA, source: ScannerType.unknown);
+        code: '123',
+        format: BarcodeFormat.upcA,
+        source: ScannerType.unknown,
+      );
       expect(BarcodeScanResult.fromMap(result.toMap()), result);
       _expectAllowedType(result.toMap());
 
       const result2 = BarcodeScanResult(
-          code: '124', format: BarcodeFormat.qr, source: ScannerType.camera);
+        code: '124',
+        format: BarcodeFormat.qr,
+        source: ScannerType.camera,
+      );
       expect(BarcodeScanResult.fromMap(result2.toMap()), result2);
       _expectAllowedType(result2.toMap());
 
       const result3 = BarcodeScanResult(
-          code: '124', format: null, source: ScannerType.unitech);
+        code: '124',
+        format: null,
+        source: ScannerType.unitech,
+      );
       expect(BarcodeScanResult.fromMap(result3.toMap()), result3);
       _expectAllowedType(result3.toMap());
     });
