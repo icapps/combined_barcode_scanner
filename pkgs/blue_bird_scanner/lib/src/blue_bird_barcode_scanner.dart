@@ -68,9 +68,12 @@ class BlueBirdBarcodeScanner implements BarcodeScanner {
   });
 }
 
-class _BlueBirdController implements BarcodeScannerController {
+class _BlueBirdController extends BarcodeScannerController {
   final BlueBirdScanner _scanner;
   final bool enabled;
+
+  @override
+  bool get isControllerSupported => enabled;
 
   _BlueBirdController(
     this._scanner, {

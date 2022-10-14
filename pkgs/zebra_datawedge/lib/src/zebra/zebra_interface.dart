@@ -9,8 +9,8 @@ class ZebraInterface {
 
   static EventChannel? _eventChannel;
 
-  static Future<bool> get isSupported async {
-    return await _channel.invokeMethod<bool>('isSupported') == true;
+  static Future<bool> get isControllerSupported async {
+    return await _channel.invokeMethod<bool>('isControllerSupported') == true;
   }
 
   static Future<List<String>> get profiles async {
@@ -29,11 +29,16 @@ class ZebraInterface {
 
   static Future<bool> updateProfile(
       String name, List<String> supportedBarcodes) async {
-    return await _channel.invokeMethod<bool>('updateProfile', <String, dynamic>{
-          'profileName': name,
-          'formats': supportedBarcodes
-        }) ==
-        true;
+    try {
+      return await _channel.invokeMethod<bool>(
+              'updateProfile', <String, dynamic>{
+            'profileName': name,
+            'formats': supportedBarcodes
+          }) ==
+          true;
+    } catch (e) {
+      return false;
+    }
   }
 
   static Stream<String> events() {
