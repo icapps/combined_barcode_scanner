@@ -30,12 +30,10 @@ class BarcodeScannerWidgetController {
   void pause() => _onEndListener?.call();
 
   /// Whether the device can switch between cameras (for example front vs back)
-  Future<bool> get supportsSwitchingCamera async =>
-      await _onSupportsSwitchingCameraListener?.call() ?? false;
+  Future<bool> get supportsSwitchingCamera async => await _onSupportsSwitchingCameraListener?.call() ?? false;
 
   /// Whether the device can switch torch on/off
-  Future<bool> get supportsSwitchingTorch async =>
-      await TorchCompat.hasTorch ?? false;
+  Future<bool> get supportsSwitchingTorch async => await TorchCompat.hasTorch ?? false;
 
   /// Whether the device has a torch that is on
   bool get isTorchOn => _onIsTorchOnListener?.call() ?? false;
@@ -47,8 +45,7 @@ class BarcodeScannerWidgetController {
   Future<void> toggleTorch() async => _onToggleTorchListener?.call();
 
   /// Whether the scanner type is supported
-  bool supportsScanner<T extends BarcodeScanner>() =>
-      _onSupportScannerListener?.call<T>() ?? false;
+  bool supportsScanner<T extends BarcodeScanner>() => _onSupportScannerListener?.call<T>() ?? false;
 
   /// Call this to dispose the controller
   void dispose() {
@@ -91,6 +88,18 @@ class BarcodeScannerWidget extends StatefulWidget {
 
   @override
   State<BarcodeScannerWidget> createState() => _BarcodeScannerWidgetState();
+
+  void _onScan(BarcodeScanResult code) {
+    if (configuration.trimWhiteSpaces) {
+      onScan(BarcodeScanResult(
+        code: code.code.trim(),
+        format: code.format,
+        source: code.source,
+      ));
+    } else {
+      onScan(code);
+    }
+  }
 }
 
 class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
@@ -124,8 +133,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     // If the configuration changes, we need to rebuild all scanners.
     // Wait for the previous configuration to finish first before calling
     // dispose
-    if (!listEquals(widget.scanners, oldWidget.scanners) ||
-        widget.configuration != oldWidget.configuration) {
+    if (!listEquals(widget.scanners, oldWidget.scanners) || widget.configuration != oldWidget.configuration) {
       _configureCompleter.future.then((_) {
         _configureCompleter = Completer<void>();
         for (final scanner in _configuredScanners) {
@@ -154,11 +162,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: _configuredScanners
-          .map((e) => e?.properties.hasUI == true
-              ? e!.buildUI(widget.configuration, context)!
-              : const SizedBox())
-          .toList(),
+      children: _configuredScanners.map((e) => e?.properties.hasUI == true ? e!.buildUI(widget.configuration, context)! : const SizedBox()).toList(),
     );
   }
 
@@ -181,8 +185,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     return false;
   }
 
-  bool _onIsTorchOnListener() => _configuredScanners
-      .any((element) => element?.controller.isTorchOn ?? false);
+  bool _onIsTorchOnListener() => _configuredScanners.any((element) => element?.controller.isTorchOn ?? false);
 
   Future<void> _onToggleCameraListener() async {
     for (final value in _configuredScanners) {
@@ -194,9 +197,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   }
 
   bool _onSupportScannerListener<T extends BarcodeScanner>() {
-    return _configuredScanners
-        .whereType<T>()
-        .any((element) => element.controller.isControllerSupported);
+    return _configuredScanners.whereType<T>().any((element) => element.controller.isControllerSupported);
   }
 
   Future<void> _onToggleTorchListener() async {
@@ -219,9 +220,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     var completed = 0;
     for (final scanner in widget.scanners) {
       final index = c++;
-      scanner
-          .configure(configuration: widget.configuration, onScan: widget.onScan)
-          .then((_) {
+      scanner.configure(configuration: widget.configuration, onScan: widget._onScan).then((_) {
         ++completed;
         if (mounted) {
           _configuredScanners[index] = scanner;

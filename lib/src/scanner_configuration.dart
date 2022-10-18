@@ -18,9 +18,13 @@ class ScannerConfiguration {
   /// reasonable defaults.
   final CameraConfiguration? cameraConfiguration;
 
+  /// Whether to automatically trim leading and trailing whitespaces from the scanned code. Defaults to false.
+  final bool trimWhiteSpaces;
+
   const ScannerConfiguration({
     required this.enableFormats,
     this.cameraConfiguration,
+    this.trimWhiteSpaces = false,
   });
 
   @override
@@ -31,33 +35,24 @@ class ScannerConfiguration {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ScannerConfiguration &&
-          runtimeType == other.runtimeType &&
-          setEquals(enableFormats, other.enableFormats) &&
-          cameraConfiguration == other.cameraConfiguration;
+      other is ScannerConfiguration && runtimeType == other.runtimeType && setEquals(enableFormats, other.enableFormats) && cameraConfiguration == other.cameraConfiguration;
 
   @override
   int get hashCode => enableFormats.hashCode ^ cameraConfiguration.hashCode;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'enableFormats':
-          enableFormats.map((e) => e.index).toList(growable: false),
+      'enableFormats': enableFormats.map((e) => e.index).toList(growable: false),
       'cameraConfiguration': cameraConfiguration?.toMap(),
     };
   }
 
   factory ScannerConfiguration.fromMap(Map<String, dynamic> map) {
-    final camMap =
-        (map['cameraConfiguration'] as Map?)?.cast<String, dynamic>();
-    final camConfig =
-        camMap != null ? CameraConfiguration.fromMap(camMap) : null;
+    final camMap = (map['cameraConfiguration'] as Map?)?.cast<String, dynamic>();
+    final camConfig = camMap != null ? CameraConfiguration.fromMap(camMap) : null;
 
     return ScannerConfiguration(
-      enableFormats: (map['enableFormats'] as List)
-          .cast<int>()
-          .map((e) => BarcodeFormat.values[e])
-          .toSet(),
+      enableFormats: (map['enableFormats'] as List).cast<int>().map((e) => BarcodeFormat.values[e]).toSet(),
       cameraConfiguration: camConfig,
     );
   }
@@ -105,8 +100,7 @@ class CameraConfiguration {
           type == other.type;
 
   @override
-  int get hashCode =>
-      resolution.hashCode ^ frameRate.hashCode ^ mode.hashCode ^ type.hashCode;
+  int get hashCode => resolution.hashCode ^ frameRate.hashCode ^ mode.hashCode ^ type.hashCode;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

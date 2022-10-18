@@ -1,5 +1,4 @@
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
-import 'package:combined_barcode_scanner_blue_bird/combined_barcode_scanner_blue_bird.dart';
 import 'package:combined_barcode_scanner_fast/combined_barcode_scanner_fast.dart';
 import 'package:combined_barcode_scanner_honeywell/combined_barcode_scanner_honeywell.dart';
 import 'package:combined_barcode_scanner_unitech/combined_barcode_scanner_unitech.dart';
@@ -45,10 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _controller = BarcodeScannerWidgetController();
-    _controller.supportsSwitchingCamera
-        .then((value) => setState(() => _supportsSwitchingCamera = value));
-    _controller.supportsSwitchingTorch
-        .then((value) => setState(() => _supportsSwitchingTorch = value));
+    _controller.supportsSwitchingCamera.then((value) => setState(() => _supportsSwitchingCamera = value));
+    _controller.supportsSwitchingTorch.then((value) => setState(() => _supportsSwitchingTorch = value));
   }
 
   @override
@@ -69,9 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: BarcodeScannerWidget(
               controller: _controller,
               onScan: (code) {
-                print("GOT BARCODE =========== ${code.code}");
+                print("GOT BARCODE =========== START${code.code}END");
               },
               configuration: const ScannerConfiguration(
+                trimWhiteSpaces: true,
                 enableFormats: {
                   BarcodeFormat.qr,
                   BarcodeFormat.code128,
@@ -87,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 FastBarcodeScanner(),
                 HoneywellBarcodeScanner(),
                 UnitechBarcodeScanner(),
-                BlueBirdBarcodeScanner(),
+                // BlueBirdBarcodeScanner(),
                 ZebraBarcodeScanner('my_profile'),
                 UsbKeyboardScanner(),
               ],
@@ -98,8 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               if (_supportsSwitchingTorch) ...[
                 MaterialButton(
-                  child: Icon(
-                      _controller.isTorchOn ? Icons.flash_off : Icons.flash_on),
+                  child: Icon(_controller.isTorchOn ? Icons.flash_off : Icons.flash_on),
                   onPressed: () {
                     _controller.toggleTorch();
                     setState(() {});
