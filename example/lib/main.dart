@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: BarcodeScannerWidget(
               controller: _controller,
               onScan: (code) {
-                print("GOT BARCODE =========== START${code.code}END");
+                print("GOT BARCODE =========== ${code.code}");
               },
               configuration: const ScannerConfiguration(
                 trimWhiteSpaces: true,
