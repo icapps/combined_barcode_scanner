@@ -100,6 +100,7 @@ BarcodeScanResult _mapBarcode(fbs.Barcode code) {
   return BarcodeScanResult(
     code: code.value,
     format: _mapFastToType(code.type),
+    source: ScannerType.camera,
   );
 }
 

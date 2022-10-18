@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:blue_bird_scanner/blue_bird_scanner.dart';
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:blue_bird_scanner/blue_bird_scanner.dart';
 
 /// Barcode scanner implementation that uses the blue bird
 /// hardware scanner where available.
@@ -103,7 +103,13 @@ class _ScannerWrapper implements ScannerCallBack {
   @override
   void onDecoded(String? result) {
     if (result != null) {
-      onScan(BarcodeScanResult(code: result, format: null));
+      onScan(
+        BarcodeScanResult(
+          code: result,
+          format: null,
+          source: ScannerType.bluebird,
+        ),
+      );
     }
   }
 
