@@ -20,7 +20,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
   UsbKeyboardScanner({this.maxCharacterInputIntervalMs = 50});
 
   @override
-  Widget? buildUI(ScannerConfiguration configuration, BuildContext context) => KeyboardListener(
+  Widget? buildUI(ScannerConfiguration configuration, BuildContext context) =>
+      KeyboardListener(
         focusNode: _focusNode,
         autofocus: true,
         onKeyEvent: _onKeyEvent,
@@ -76,7 +77,8 @@ class UsbKeyboardScanner implements BarcodeScanner {
       Duration(milliseconds: maxCharacterInputIntervalMs),
       () async {
         //trim spaces, tabs and `null` characters (\u0000)
-        final finalScanString = _externalScanString.trim().replaceAll('\u0000', '');
+        final finalScanString =
+            _externalScanString.trim().replaceAll('\u0000', '');
         _externalScanString = '';
         _onScan(
           BarcodeScanResult(
