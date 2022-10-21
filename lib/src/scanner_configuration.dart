@@ -18,9 +18,13 @@ class ScannerConfiguration {
   /// reasonable defaults.
   final CameraConfiguration? cameraConfiguration;
 
+  /// Whether to automatically trim leading and trailing whitespaces from the scanned code. Defaults to false.
+  final bool trimWhiteSpaces;
+
   const ScannerConfiguration({
     required this.enableFormats,
     this.cameraConfiguration,
+    this.trimWhiteSpaces = false,
   });
 
   @override

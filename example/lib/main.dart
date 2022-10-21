@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 print("GOT BARCODE =========== ${code.code}");
               },
               configuration: const ScannerConfiguration(
+                trimWhiteSpaces: true,
                 enableFormats: {
                   BarcodeFormat.qr,
                   BarcodeFormat.code128,
@@ -99,7 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
               if (_supportsSwitchingTorch) ...[
                 MaterialButton(
                   child: Icon(
-                      _controller.isTorchOn ? Icons.flash_off : Icons.flash_on),
+                    _controller.isTorchOn ? Icons.flash_off : Icons.flash_on,
+                  ),
                   onPressed: () {
                     _controller.toggleTorch();
                     setState(() {});

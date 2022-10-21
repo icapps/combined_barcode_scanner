@@ -91,6 +91,18 @@ class BarcodeScannerWidget extends StatefulWidget {
 
   @override
   State<BarcodeScannerWidget> createState() => _BarcodeScannerWidgetState();
+
+  void _onScan(BarcodeScanResult code) {
+    if (configuration.trimWhiteSpaces) {
+      onScan(BarcodeScanResult(
+        code: code.code.trim(),
+        format: code.format,
+        source: code.source,
+      ));
+    } else {
+      onScan(code);
+    }
+  }
 }
 
 class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
@@ -220,7 +232,8 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
     for (final scanner in widget.scanners) {
       final index = c++;
       scanner
-          .configure(configuration: widget.configuration, onScan: widget.onScan)
+          .configure(
+              configuration: widget.configuration, onScan: widget._onScan)
           .then((_) {
         ++completed;
         if (mounted) {
