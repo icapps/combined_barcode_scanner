@@ -5,6 +5,12 @@ into a single barcode scanner source.
 To implement a custom scanner, import this package and implement your custom subclass
 of `BarcodeScanner` and `BarcodeScannerController`
 
+## Not found FastBarcodeScanner()
+
+see https://github.com/icapps/combined_barcode_scanner/issues/8
+
+We are waiting for a merge in one of the dependencies. While we wait, you can use this "temporary" workaround
+
 ## Example Usage
 ```dart
 BarcodeScannerWidget(
