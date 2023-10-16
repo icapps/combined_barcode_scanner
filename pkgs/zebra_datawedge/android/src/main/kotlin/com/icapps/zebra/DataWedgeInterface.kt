@@ -1,17 +1,18 @@
 package com.icapps.zebra
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.app.Activity
+import android.content.*
+import android.content.ContentValues.TAG
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.icapps.architecture.arch.ConcreteMutableObservableFuture
 import com.icapps.architecture.arch.MutableObservableFuture
 import com.icapps.architecture.arch.ObservableFuture
 import com.icapps.architecture.arch.asObservable
-import java.util.LinkedList
-import java.util.UUID
+import java.util.*
 
 /**
  * @author Nicola Verbeeck
@@ -30,6 +31,8 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         private const val INTENT_EXTRA_COMMAND = "COMMAND"
         private const val INTENT_EXTRA_RESULT = "RESULT"
         private const val INTENT_EXTRA_ACTION_SOFT_SCANNER = "com.symbol.datawedge.api.SOFT_SCAN_TRIGGER"
+        // private const val URI_IMEI = "somethingsomething"
+        private const val URI_IMEI = "content://oem_info/wan/imei"
 
         private const val ID_GET_PROFILES = "getProfiles"
     }
@@ -54,7 +57,7 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
     fun getProfiles(): ObservableFuture<List<String>> {
         val future = ConcreteMutableObservableFuture<List<String>>()
         val command = Intent(INTENT_ACTION)
-            .putExtra(INTENT_EXTRA_ACTION_GET_PROFILES, "")
+                .putExtra(INTENT_EXTRA_ACTION_GET_PROFILES, "")
 
         waitingCommands[ID_GET_PROFILES] = future
         sendCommand(command)
@@ -65,9 +68,9 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
     fun createProfile(name: String, barcodes: Set<BarcodeType>): ObservableFuture<Boolean> {
         val id = UUID.randomUUID().toString()
         val command = Intent(INTENT_ACTION)
-            .putExtra(INTENT_EXTRA_ACTION_CREATE_PROFILE, name)
-            .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
-            .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
+                .putExtra(INTENT_EXTRA_ACTION_CREATE_PROFILE, name)
+                .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+                .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
 
         val future = ConcreteMutableObservableFuture<Boolean>()
         waitingCommands[id] = future
@@ -102,10 +105,10 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         waitingCommands[id] = future
 
         sendCommand(
-            Intent(INTENT_ACTION)
-                .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
-                .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
-                .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
+                Intent(INTENT_ACTION)
+                        .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
+                        .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+                        .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
         )
 
         return future andThen {
@@ -140,10 +143,10 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         waitingCommands[id] = future
 
         sendCommand(
-            Intent(INTENT_ACTION)
-                .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
-                .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
-                .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
+                Intent(INTENT_ACTION)
+                        .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
+                        .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+                        .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
         )
 
         return future andThen {
@@ -158,8 +161,8 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         profileConfig.putString("CONFIG_MODE", "UPDATE")
 
         appContext.sendBroadcast(
-            Intent(INTENT_ACTION)
-                .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
+                Intent(INTENT_ACTION)
+                        .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
         )
 
         val intentConfig = Bundle()
@@ -177,10 +180,10 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         waitingCommands[id] = future
 
         sendCommand(
-            Intent(INTENT_ACTION)
-                .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
-                .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
-                .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
+                Intent(INTENT_ACTION)
+                        .putExtra(INTENT_EXTRA_ACTION_SET_CONFIG, profileConfig)
+                        .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+                        .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
         )
 
         return future
@@ -241,13 +244,55 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         return toggleScanner(false)
     }
 
+    // fun retrieveIMEI(context: Context): String? {
+    //     val myUri = Uri.parse(URI_IMEI)
+
+    //     // Query the content provider
+    //     val cr: ContentResolver = context.contentResolver
+    //     val cursor: Cursor? = cr.query(myUri, null, null, null, null)
+
+    //     // Read the cursor
+    //     cursor?.moveToFirst()
+    //     val imei: String = cursor?.getString(0) ?: ""
+    //     Log.i(TAG, "Device IMEI is : $imei")
+    //     return imei
+    // }
+
+    fun retrieveIMEI(context: Context): String? {
+        val uri = Uri.parse(URI_IMEI)
+        var data = "Error"
+        val cursor = context.contentResolver.query(uri, null, null, null, null)
+        if (cursor == null || cursor.count < 1) {
+            val errorMsg = "Could not read identifier.  Have you granted access?  Does this device support retrieval of this identifier?"
+            return errorMsg
+        } else {
+            while (cursor.moveToNext()) {
+                if (cursor.columnCount == 0) {
+                    //  No data in the cursor.
+                    val errorMsg = "Error: $uri does not exist on this device"
+                    return errorMsg
+                } else {
+                    for (i in 0 until cursor.columnCount) {
+                        try {
+                            data = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(i)))
+                        } catch (e: Exception) {
+                            return e.message
+                        }
+                    }
+                }
+            }
+            cursor.close()
+            return data
+        }
+    }
+
     private fun toggleScanner(on: Boolean): ObservableFuture<Boolean> {
         val future = ConcreteMutableObservableFuture<Boolean>()
         val id = UUID.randomUUID().toString()
         val command = Intent(INTENT_ACTION)
-            .putExtra(INTENT_EXTRA_ACTION_SOFT_SCANNER, if (on) "START_SCANNING" else "STOP_SCANNING")
-            .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
-            .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
+                .putExtra(INTENT_EXTRA_ACTION_SOFT_SCANNER, if (on) "START_SCANNING" else "STOP_SCANNING")
+                .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+                .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
 
         waitingCommands[id] = future
         sendCommand(command)
