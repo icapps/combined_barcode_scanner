@@ -37,14 +37,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late final BarcodeScannerWidgetController _controller;
+  late final _controller = BarcodeScannerWidgetController(_onScannerLoaded);
+
   bool _supportsSwitchingCamera = false;
   bool _supportsSwitchingTorch = false;
+  bool _supportsZebraScan = false;
+  String? _code;
+
+  final _scanners = [
+    FastBarcodeScanner(),
+    HoneywellBarcodeScanner(),
+    UnitechBarcodeScanner(),
+    BlueBirdBarcodeScanner(),
+    ZebraBarcodeScanner('my_profile'),
+    UsbKeyboardScanner(),
+  ];
 
   @override
   void initState() {
     super.initState();
-    _controller = BarcodeScannerWidgetController();
     _controller.supportsSwitchingCamera.then((bool value) => setState(() => _supportsSwitchingCamera = value));
     _controller.supportsSwitchingTorch.then((bool value) => setState(() => _supportsSwitchingTorch = value));
   }
@@ -53,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _onScannerLoaded() {
+    setState(() {
+      _supportsZebraScan = _controller.supportsScanner<ZebraBarcodeScanner>();
+    });
   }
 
   @override
@@ -64,33 +81,34 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Expanded(
-            child: BarcodeScannerWidget(
-              controller: _controller,
-              onScan: (code) {
-                print("GOT BARCODE =========== ${code.code}");
-              },
-              configuration: const ScannerConfiguration(
-                trimWhiteSpaces: true,
-                enableFormats: {
-                  BarcodeFormat.qr,
-                  BarcodeFormat.code128,
+            child: ClipRect(
+              child: BarcodeScannerWidget(
+                controller: _controller,
+                onScan: (code) {
+                  setState(() {
+                    _code = code.code;
+                  });
+                  print("GOT BARCODE =========== ${code.code}");
                 },
-                cameraConfiguration: CameraConfiguration(
-                  frameRate: 30,
-                  mode: BarcodeDetectionMode.continuous,
-                  resolution: CameraResolution.medium,
-                  type: CameraType.back,
+                configuration: const ScannerConfiguration(
+                  trimWhiteSpaces: true,
+                  enableFormats: {
+                    BarcodeFormat.qr,
+                    BarcodeFormat.code128,
+                  },
+                  cameraConfiguration: CameraConfiguration(
+                    frameRate: 30,
+                    mode: BarcodeDetectionMode.continuous,
+                    resolution: CameraResolution.medium,
+                    type: CameraType.back,
+                  ),
                 ),
+                scanners: _scanners,
               ),
-              scanners: [
-                FastBarcodeScanner(),
-                HoneywellBarcodeScanner(),
-                UnitechBarcodeScanner(),
-                BlueBirdBarcodeScanner(),
-                ZebraBarcodeScanner('my_profile'),
-                UsbKeyboardScanner(),
-              ],
             ),
+          ),
+          Text(
+            'Code: ${_code ?? 'N/A'}',
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,6 +129,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Icon(Icons.flip_camera_ios),
                   onPressed: _controller.toggleCamera,
                 ),
+              ],
+              if (_supportsZebraScan) ...[
+                Icon(Icons.barcode_reader),
               ],
             ],
           ),

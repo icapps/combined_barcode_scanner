@@ -211,6 +211,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
   }
 
   void _buildScanners() {
+    print('===== _buildScanners =====');
     _configuredScanners.clear();
     _configuredScanners.length = widget.scanners.length;
     _configuredScanners.fillRange(0, _configuredScanners.length, null);
@@ -222,6 +223,7 @@ class _BarcodeScannerWidgetState extends State<BarcodeScannerWidget> {
       final index = c++;
       scanner.configure(configuration: widget.configuration, onScan: widget._onScan).then((_) {
         ++completed;
+        print("Configured scanner $index, type: ${scanner.runtimeType}, completed: $completed");
         if (mounted) {
           _configuredScanners[index] = scanner;
           setState(() {});

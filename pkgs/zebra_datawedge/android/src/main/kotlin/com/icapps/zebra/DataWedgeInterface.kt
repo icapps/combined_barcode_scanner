@@ -66,7 +66,7 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         val id = UUID.randomUUID().toString()
         val command = Intent(INTENT_ACTION)
             .putExtra(INTENT_EXTRA_ACTION_CREATE_PROFILE, name)
-            .putExtra(INTENT_EXTRA_SEND_RESULT, "true")
+            .putExtra(INTENT_EXTRA_SEND_RESULT, "true") 
             .putExtra(INTENT_EXTRA_COMMAND_IDENTIFIER, id)
 
         val future = ConcreteMutableObservableFuture<Boolean>()

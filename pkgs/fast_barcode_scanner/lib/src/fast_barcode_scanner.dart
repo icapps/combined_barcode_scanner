@@ -1,5 +1,5 @@
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
-import 'package:fast_barcode_scanner/fast_barcode_scanner.dart' as fbs;
+import 'package:icapps_fast_barcode_scanner/icapps_fast_barcode_scanner.dart' as fbs;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +19,7 @@ class FastBarcodeScanner implements BarcodeScanner {
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) {
-    final cameraConfig =
-        configuration.cameraConfiguration ?? _defaultCameraConfig;
+    final cameraConfig = configuration.cameraConfiguration ?? _defaultCameraConfig;
     return fbs.BarcodeCamera(
       types: _mapTypes(configuration.enableFormats),
       resolution: _mapResolution(cameraConfig.resolution),
@@ -83,8 +82,7 @@ class FastBarcodeScannerController extends BarcodeScannerController {
   }
 
   @override
-  Future<bool> get supportsSwitchingCamera =>
-      fbs.CameraController.instance.canChangeCamera();
+  Future<bool> get supportsSwitchingCamera => fbs.CameraController.instance.canChangeCamera();
 
   @override
   Future<void> toggleCamera() => fbs.CameraController.instance.toggleCamera();
@@ -131,8 +129,7 @@ BarcodeFormat _mapFastToType(fbs.BarcodeType type) {
     case fbs.BarcodeType.upcE:
       return BarcodeFormat.upcE;
     default:
-      throw ArgumentError(
-          'Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
+      throw ArgumentError('Unsupported barcode format scanned. Wrong configuration?!. Type: $type');
   }
 }
 
