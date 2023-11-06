@@ -1,0 +1,27 @@
+name: combined_barcode_scanner_honeywell
+description: Combined Barcode scanner package that interfaces with honeywell scanners
+version: 1.0.0
+homepage: https://github.com/icapps/combined_barcode_scanner
+repository: https://github.com/icapps/combined_barcode_scanner
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  combined_barcode_scanner: ^1.0.0
+  flutter:
+    sdk: flutter
+  honeywell_scanner: ^3.1.4+12
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+## snippet used for testing changes in combined_barcode_scanner during development:
+#dependency_overrides:
+# combined_barcode_scanner:
+#   path: ../..
+
+flutter:

@@ -4,25 +4,24 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 < 4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  fast_barcode_scanner: 1.1.4
   cupertino_icons: ^1.0.2
   combined_barcode_scanner_fast:
-    path: ../pkgs/fast_barcode_scanner
+    path: ../packages/fast_barcode_scanner
   combined_barcode_scanner_unitech:
-    path: ../pkgs/unitech
+    path: ../packages/unitech
   combined_barcode_scanner_honeywell:
-    path: ../pkgs/honeywell
+    path: ../packages/honeywell
   combined_barcode_scanner_zebra:
-    path: ../pkgs/zebra_datawedge
+    path: ../packages/zebra_datawedge
   combined_barcode_scanner_blue_bird:
-    path: ../pkgs/blue_bird_scanner
+    path: ../packages/blue_bird_scanner
   combined_barcode_scanner_usb_keyboard:
-    path: ../pkgs/usb_keyboard_scanner
+    path: ../packages/usb_keyboard_scanner
 
 dev_dependencies:
   flutter_test:
@@ -32,14 +31,6 @@ dev_dependencies:
 dependency_overrides:
   combined_barcode_scanner:
     path: ../
-  fast_barcode_scanner:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner
-  fast_barcode_scanner_platform_interface:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner_platform_interface
 
 flutter:
   uses-material-design: true

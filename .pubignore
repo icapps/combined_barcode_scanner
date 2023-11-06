@@ -9,3 +9,4 @@ example/.idea/
 test/
 .packages
 .metadata
+packages/

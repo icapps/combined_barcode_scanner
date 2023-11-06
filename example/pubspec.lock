@@ -5,125 +5,115 @@ packages:
     dependency: transitive
     description:
       name: async
-      url: "https://pub.dartlang.org"
+      sha256: "947bfcf187f74dbc5e146c9eb9c0f10c9f8b30743e341481c1e2ed3ecc18c20c"
+      url: "https://pub.dev"
     source: hosted
-    version: "2.9.0"
+    version: "2.11.0"
   blue_bird_scanner:
     dependency: transitive
     description:
       name: blue_bird_scanner
-      url: "https://pub.dartlang.org"
+      sha256: d7f8b4e7832014c441db6751235c247af52fef6e3a25406bfbffe68699ce7ef4
+      url: "https://pub.dev"
     source: hosted
     version: "2.0.1+5"
   boolean_selector:
     dependency: transitive
     description:
       name: boolean_selector
-      url: "https://pub.dartlang.org"
+      sha256: "6cfb5af12253eaf2b368f07bacc5a80d1301a071c73360d746b7f2e32d762c66"
+      url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   characters:
     dependency: transitive
     description:
       name: characters
-      url: "https://pub.dartlang.org"
+      sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
+      url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "1.3.0"
   clock:
     dependency: transitive
     description:
       name: clock
-      url: "https://pub.dartlang.org"
+      sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
+      url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
   collection:
     dependency: transitive
     description:
       name: collection
-      url: "https://pub.dartlang.org"
+      sha256: "4a07be6cb69c84d677a6c3096fcf960cc3285a8330b4603e0d463d15d9bd934c"
+      url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.1"
   combined_barcode_scanner:
     dependency: "direct overridden"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1-dev.2"
+    version: "1.0.0"
   combined_barcode_scanner_blue_bird:
     dependency: "direct main"
     description:
-      path: "../pkgs/blue_bird_scanner"
+      path: "../packages/blue_bird_scanner"
       relative: true
     source: path
-    version: "0.0.1-dev.0"
+    version: "1.0.0"
   combined_barcode_scanner_fast:
     dependency: "direct main"
     description:
-      path: "../pkgs/fast_barcode_scanner"
+      path: "../packages/fast_barcode_scanner"
       relative: true
     source: path
-    version: "0.0.1-dev.0"
+    version: "1.0.0"
   combined_barcode_scanner_honeywell:
     dependency: "direct main"
     description:
-      path: "../pkgs/honeywell"
+      path: "../packages/honeywell"
       relative: true
     source: path
-    version: "0.0.1-dev.0"
+    version: "1.0.0"
   combined_barcode_scanner_unitech:
     dependency: "direct main"
     description:
-      path: "../pkgs/unitech"
+      path: "../packages/unitech"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   combined_barcode_scanner_usb_keyboard:
     dependency: "direct main"
     description:
-      path: "../pkgs/usb_keyboard_scanner"
+      path: "../packages/usb_keyboard_scanner"
       relative: true
     source: path
-    version: "0.0.1-dev.0"
+    version: "1.0.0"
   combined_barcode_scanner_zebra:
     dependency: "direct main"
     description:
-      path: "../pkgs/zebra_datawedge"
+      path: "../packages/zebra_datawedge"
       relative: true
     source: path
-    version: "0.0.1-dev.0"
+    version: "1.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      url: "https://pub.dartlang.org"
+      sha256: "1989d917fbe8e6b39806207df5a3fdd3d816cbd090fac2ce26fb45e9a71476e5"
+      url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
   fake_async:
     dependency: transitive
     description:
       name: fake_async
-      url: "https://pub.dartlang.org"
+      sha256: "511392330127add0b769b75a987850d136345d9227c6b94c96a04cf4a391bf78"
+      url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
-  fast_barcode_scanner:
-    dependency: "direct main"
-    description:
-      path: fast_barcode_scanner
-      ref: HEAD
-      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
-      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
-    source: git
-    version: "1.1.4"
-  fast_barcode_scanner_platform_interface:
-    dependency: "direct overridden"
-    description:
-      path: fast_barcode_scanner_platform_interface
-      ref: HEAD
-      resolved-ref: "4aca0cde795e2ac73fe2c363bfe58b498e867e50"
-      url: "https://github.com/ikbendewilliam/fast_barcode_scanner.git"
-    source: git
-    version: "1.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -133,7 +123,8 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      url: "https://pub.dartlang.org"
+      sha256: b543301ad291598523947dc534aaddc5aaad597b709d2426d3a0e0d44c5cb493
+      url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
   flutter_test:
@@ -145,49 +136,88 @@ packages:
     dependency: transitive
     description:
       name: honeywell_scanner
-      url: "https://pub.dartlang.org"
+      sha256: "526c1f3a9747184c9627e05aec89e531585b0cb1629eb6dfadc22a25eaf9cf39"
+      url: "https://pub.dev"
     source: hosted
     version: "3.1.4+12"
+  icapps_fast_barcode_scanner:
+    dependency: transitive
+    description:
+      name: icapps_fast_barcode_scanner
+      sha256: "68ed6a8cd3134a0a5e5accc9f4f52ad6cce7856e0e76e7a8e9e1b60bf6f88689"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  icapps_fast_barcode_scanner_platform_interface:
+    dependency: transitive
+    description:
+      name: icapps_fast_barcode_scanner_platform_interface
+      sha256: "71b7cc91d521746511e6ccd1f15b868123444b0f4ea3156658f9454ecad604e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  icapps_torch_compat:
+    dependency: transitive
+    description:
+      name: icapps_torch_compat
+      sha256: "5847269b394f228c23059e962ef3d404f30864f44cbab667ed898f1e987f6a0f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.7"
   lints:
     dependency: transitive
     description:
       name: lints
-      url: "https://pub.dartlang.org"
+      sha256: a2c3d198cb5ea2e179926622d433331d8b58374ab8f29cdda6e863bd62fd369c
+      url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
   matcher:
     dependency: transitive
     description:
       name: matcher
-      url: "https://pub.dartlang.org"
+      sha256: "6501fbd55da300384b768785b83e5ce66991266cec21af89ab9ae7f5ce1c4cbb"
+      url: "https://pub.dev"
     source: hosted
-    version: "0.12.12"
+    version: "0.12.15"
   material_color_utilities:
     dependency: transitive
     description:
       name: material_color_utilities
-      url: "https://pub.dartlang.org"
+      sha256: d92141dc6fe1dad30722f9aa826c7fbc896d021d792f80678280601aff8cf724
+      url: "https://pub.dev"
     source: hosted
-    version: "0.1.5"
+    version: "0.2.0"
   meta:
     dependency: transitive
     description:
       name: meta
-      url: "https://pub.dartlang.org"
+      sha256: "3c74dbf8763d36539f114c799d8a2d87343b5067e9d796ca22b5eb8437090ee3"
+      url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.1"
   path:
     dependency: transitive
     description:
       name: path
-      url: "https://pub.dartlang.org"
+      sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
+      url: "https://pub.dev"
     source: hosted
-    version: "1.8.2"
+    version: "1.8.3"
   plugin_platform_interface:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      url: "https://pub.dartlang.org"
+      sha256: f843e0027496f0d841166707029237a0bef39cfc0c79b93b1bb1a10beae73244
+      url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
   sky_engine:
@@ -199,60 +229,58 @@ packages:
     dependency: transitive
     description:
       name: source_span
-      url: "https://pub.dartlang.org"
+      sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
+      url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "1.9.1"
   stack_trace:
     dependency: transitive
     description:
       name: stack_trace
-      url: "https://pub.dartlang.org"
+      sha256: c3c7d8edb15bee7f0f74debd4b9c5f3c2ea86766fe4178eb2a18eb30a0bdaed5
+      url: "https://pub.dev"
     source: hosted
-    version: "1.10.0"
+    version: "1.11.0"
   stream_channel:
     dependency: transitive
     description:
       name: stream_channel
-      url: "https://pub.dartlang.org"
+      sha256: "83615bee9045c1d322bbbd1ba209b7a749c2cbcdcb3fdd1df8eb488b3279c1c8"
+      url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   string_scanner:
     dependency: transitive
     description:
       name: string_scanner
-      url: "https://pub.dartlang.org"
+      sha256: "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde"
+      url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   term_glyph:
     dependency: transitive
     description:
       name: term_glyph
-      url: "https://pub.dartlang.org"
+      sha256: a29248a84fbb7c79282b40b8c72a1209db169a2e0542bce341da992fe1bc7e84
+      url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
   test_api:
     dependency: transitive
     description:
       name: test_api
-      url: "https://pub.dartlang.org"
+      sha256: eb6ac1540b26de412b3403a163d919ba86f6a973fe6cc50ae3541b80092fdcfb
+      url: "https://pub.dev"
     source: hosted
-    version: "0.4.12"
-  torch_compat:
-    dependency: transitive
-    description:
-      path: "."
-      ref: "2838bf2dac168937ad19ed4301633c320b4aa4c0"
-      resolved-ref: "2838bf2dac168937ad19ed4301633c320b4aa4c0"
-      url: "https://github.com/icapps/flutter_torch_compat"
-    source: git
-    version: "1.1.2"
+    version: "0.5.1"
   vector_math:
     dependency: transitive
     description:
       name: vector_math
-      url: "https://pub.dartlang.org"
+      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
+      url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.4"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
+  dart: ">=3.0.0 <4.0.0"
   flutter: ">=2.0.0"

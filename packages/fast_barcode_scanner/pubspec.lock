@@ -41,6 +41,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
+  combined_barcode_scanner:
+    dependency: "direct main"
+    description:
+      path: "../.."
+      relative: true
+    source: path
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -67,8 +74,24 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  icapps_torch_compat:
+  icapps_fast_barcode_scanner:
     dependency: "direct main"
+    description:
+      name: icapps_fast_barcode_scanner
+      sha256: "68ed6a8cd3134a0a5e5accc9f4f52ad6cce7856e0e76e7a8e9e1b60bf6f88689"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  icapps_fast_barcode_scanner_platform_interface:
+    dependency: transitive
+    description:
+      name: icapps_fast_barcode_scanner_platform_interface
+      sha256: "71b7cc91d521746511e6ccd1f15b868123444b0f4ea3156658f9454ecad604e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  icapps_torch_compat:
+    dependency: transitive
     description:
       name: icapps_torch_compat
       sha256: "5847269b394f228c23059e962ef3d404f30864f44cbab667ed898f1e987f6a0f"
@@ -123,6 +146,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: f843e0027496f0d841166707029237a0bef39cfc0c79b93b1bb1a10beae73244
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:torch_compat/torch_compat.dart';
+import 'package:icapps_torch_compat/icapps_torch_compat.dart';
 
 typedef BoolCallback = bool Function();
 typedef BoolCallbackWithType = bool Function<T extends BarcodeScanner>();

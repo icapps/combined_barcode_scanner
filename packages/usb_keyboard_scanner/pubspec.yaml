@@ -1,5 +1,5 @@
-name: combined_barcode_scanner
-description: Barcode scanner package that combines multiple sources behind a simple interface
+name: combined_barcode_scanner_usb_keyboard
+description: Combined Barcode scanner package that detects usb keyboard input
 version: 1.0.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
@@ -9,13 +9,17 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
+  combined_barcode_scanner: ^1.0.0
   flutter:
     sdk: flutter
-  icapps_torch_compat: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+
+#dependency_overrides:
+# combined_barcode_scanner:
+#   path: ../..
 
 flutter:

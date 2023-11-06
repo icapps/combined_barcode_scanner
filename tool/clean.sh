@@ -8,37 +8,37 @@ fi
 echo "flutter clean"
 fvm flutter clean
 
-cd pkgs/blue_bird_scanner
+cd packages/blue_bird_scanner
 echo "flutter clean blue_bird_scanner"
 fvm flutter clean
 cd ..
 cd ..
 
-cd pkgs/fast_barcode_scanner
+cd packages/fast_barcode_scanner
 echo "flutter clean fast_barcode_scanner"
 fvm flutter clean
 cd ..
 cd ..
 
-cd pkgs/honeywell
+cd packages/honeywell
 echo "flutter clean honeywell"
 fvm flutter clean
 cd ..
 cd ..
 
-cd pkgs/unitech
+cd packages/unitech
 echo "flutter clean unitech"
 fvm flutter clean
 cd ..
 cd ..
 
-cd pkgs/usb_keyboard_scanner
+cd packages/usb_keyboard_scanner
 echo "flutter clean usb_keyboard_scanner"
 fvm flutter clean
 cd ..
 cd ..
 
-cd pkgs/zebra_datawedge
+cd packages/zebra_datawedge
 echo "flutter clean zebra_datawedge"
 fvm flutter clean
 cd ..

@@ -5,37 +5,37 @@ then
   cd ..
 fi
 
-cd pkgs/blue_bird_scanner
+cd packages/blue_bird_scanner
 echo "flutter pub get blue_bird_scanner"
 fvm flutter packages get
 cd ..
 cd ..
 
-cd pkgs/fast_barcode_scanner
+cd packages/fast_barcode_scanner
 echo "flutter pub get fast_barcode_scanner"
 fvm flutter packages get
 cd ..
 cd ..
 
-cd pkgs/honeywell
+cd packages/honeywell
 echo "flutter pub get honeywell"
 fvm flutter packages get
 cd ..
 cd ..
 
-cd pkgs/unitech
+cd packages/unitech
 echo "flutter pub get unitech"
 fvm flutter packages get
 cd ..
 cd ..
 
-cd pkgs/usb_keyboard_scanner
+cd packages/usb_keyboard_scanner
 echo "flutter pub get usb_keyboard_scanner"
 fvm flutter packages get
 cd ..
 cd ..
 
-cd pkgs/zebra_datawedge
+cd packages/zebra_datawedge
 echo "flutter pub get zebra_datawedge"
 fvm flutter packages get
 cd ..

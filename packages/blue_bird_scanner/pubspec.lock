@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  blue_bird_scanner:
+    dependency: "direct main"
+    description:
+      name: blue_bird_scanner
+      sha256: d7f8b4e7832014c441db6751235c247af52fef6e3a25406bfbffe68699ce7ef4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1+5"
   boolean_selector:
     dependency: transitive
     description:
@@ -41,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
+  combined_barcode_scanner:
+    dependency: "direct main"
+    description:
+      name: combined_barcode_scanner
+      sha256: "2921c812b40aee91cdbc475e49a08f22958081bf40ee1f2105b2fed2bb7b334b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -68,7 +84,7 @@ packages:
     source: sdk
     version: "0.0.0"
   icapps_torch_compat:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: icapps_torch_compat
       sha256: "5847269b394f228c23059e962ef3d404f30864f44cbab667ed898f1e987f6a0f"
