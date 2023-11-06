@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Updated packages to icapps versions so we can release this plugin
+
 ## 0.0.1-dev.2
 
 * Added toggleTorch, isTorchOn, toggleCamera and supportsSwitchingCamera

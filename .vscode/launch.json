@@ -43,120 +43,120 @@
         },
         {
             "name": "blue_bird_scanner",
-            "cwd": "pkgs/blue_bird_scanner",
+            "cwd": "packages/blue_bird_scanner",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "blue_bird_scanner (profile mode)",
-            "cwd": "pkgs/blue_bird_scanner",
+            "cwd": "packages/blue_bird_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "blue_bird_scanner (release mode)",
-            "cwd": "pkgs/blue_bird_scanner",
+            "cwd": "packages/blue_bird_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
             "name": "fast_barcode_scanner",
-            "cwd": "pkgs/fast_barcode_scanner",
+            "cwd": "packages/fast_barcode_scanner",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "fast_barcode_scanner (profile mode)",
-            "cwd": "pkgs/fast_barcode_scanner",
+            "cwd": "packages/fast_barcode_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "fast_barcode_scanner (release mode)",
-            "cwd": "pkgs/fast_barcode_scanner",
+            "cwd": "packages/fast_barcode_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
             "name": "honeywell",
-            "cwd": "pkgs/honeywell",
+            "cwd": "packages/honeywell",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "honeywell (profile mode)",
-            "cwd": "pkgs/honeywell",
+            "cwd": "packages/honeywell",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "honeywell (release mode)",
-            "cwd": "pkgs/honeywell",
+            "cwd": "packages/honeywell",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
             "name": "unitech",
-            "cwd": "pkgs/unitech",
+            "cwd": "packages/unitech",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "unitech (profile mode)",
-            "cwd": "pkgs/unitech",
+            "cwd": "packages/unitech",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "unitech (release mode)",
-            "cwd": "pkgs/unitech",
+            "cwd": "packages/unitech",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
             "name": "usb_keyboard_scanner",
-            "cwd": "pkgs/usb_keyboard_scanner",
+            "cwd": "packages/usb_keyboard_scanner",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "usb_keyboard_scanner (profile mode)",
-            "cwd": "pkgs/usb_keyboard_scanner",
+            "cwd": "packages/usb_keyboard_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "usb_keyboard_scanner (release mode)",
-            "cwd": "pkgs/usb_keyboard_scanner",
+            "cwd": "packages/usb_keyboard_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
             "name": "zebra_datawedge",
-            "cwd": "pkgs/zebra_datawedge",
+            "cwd": "packages/zebra_datawedge",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "zebra_datawedge (profile mode)",
-            "cwd": "pkgs/zebra_datawedge",
+            "cwd": "packages/zebra_datawedge",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "zebra_datawedge (release mode)",
-            "cwd": "pkgs/zebra_datawedge",
+            "cwd": "packages/zebra_datawedge",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

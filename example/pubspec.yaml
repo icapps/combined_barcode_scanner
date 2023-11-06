@@ -11,17 +11,17 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   combined_barcode_scanner_fast:
-    path: ../pkgs/fast_barcode_scanner
+    path: ../packages/fast_barcode_scanner
   combined_barcode_scanner_unitech:
-    path: ../pkgs/unitech
+    path: ../packages/unitech
   combined_barcode_scanner_honeywell:
-    path: ../pkgs/honeywell
+    path: ../packages/honeywell
   combined_barcode_scanner_zebra:
-    path: ../pkgs/zebra_datawedge
+    path: ../packages/zebra_datawedge
   combined_barcode_scanner_blue_bird:
-    path: ../pkgs/blue_bird_scanner
+    path: ../packages/blue_bird_scanner
   combined_barcode_scanner_usb_keyboard:
-    path: ../pkgs/usb_keyboard_scanner
+    path: ../packages/usb_keyboard_scanner
 
 dev_dependencies:
   flutter_test:
