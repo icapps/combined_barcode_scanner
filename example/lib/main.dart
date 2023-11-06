@@ -45,10 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _controller = BarcodeScannerWidgetController();
-    _controller.supportsSwitchingCamera
-        .then((value) => setState(() => _supportsSwitchingCamera = value));
-    _controller.supportsSwitchingTorch
-        .then((value) => setState(() => _supportsSwitchingTorch = value));
+    _controller.supportsSwitchingCamera.then((bool value) => setState(() => _supportsSwitchingCamera = value));
+    _controller.supportsSwitchingTorch.then((bool value) => setState(() => _supportsSwitchingTorch = value));
   }
 
   @override

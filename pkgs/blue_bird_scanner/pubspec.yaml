@@ -1,15 +1,15 @@
 name: combined_barcode_scanner_blue_bird
 description: Combined Barcode scanner package that interfaces with blue bird scanners
-version: 0.0.1-dev.0
+version: 1.0.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=2.0.0"
 
 dependencies:
-  combined_barcode_scanner: ^0.0.1-dev.2
+  combined_barcode_scanner: ^1.0.0
   flutter:
     sdk: flutter
   blue_bird_scanner: ^2.0.1+5
@@ -19,16 +19,4 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^1.0.0
   
-dependency_overrides:
-  combined_barcode_scanner:
-    path: ../../
-  fast_barcode_scanner:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner
-  fast_barcode_scanner_platform_interface:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner_platform_interface
-
 flutter:

@@ -1,20 +1,17 @@
 name: combined_barcode_scanner
 description: Barcode scanner package that combines multiple sources behind a simple interface
-version: 0.0.1-dev.2
+version: 1.0.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  torch_compat:
-    git:
-      url: https://github.com/icapps/flutter_torch_compat
-      ref: 2838bf2dac168937ad19ed4301633c320b4aa4c0
+  icapps_torch_compat: ^2.0.0
 
 dev_dependencies:
   flutter_test:

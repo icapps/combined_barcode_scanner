@@ -1,6 +1,6 @@
 name: combined_barcode_scanner_zebra
 description: Combined Barcode scanner package that interfaces with zebra scanners
-version: 0.0.1-dev.0
+version: 1.0.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 
@@ -9,7 +9,7 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  combined_barcode_scanner: ^0.0.1-dev.2
+  combined_barcode_scanner: ^1.0.0
   flutter:
     sdk: flutter
 
@@ -18,18 +18,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^1.0.0
   
-dependency_overrides:
-  combined_barcode_scanner:
-    path: ../../
-  fast_barcode_scanner:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner
-  fast_barcode_scanner_platform_interface:
-    git:
-      url: https://github.com/ikbendewilliam/fast_barcode_scanner.git
-      path: fast_barcode_scanner_platform_interface
-
 ## snippet used for testing changes in combined_barcode_scanner during development:
 #dependency_overrides:
 #  combined_barcode_scanner:
