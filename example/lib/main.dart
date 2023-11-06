@@ -56,8 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _controller.supportsSwitchingCamera.then((bool value) => setState(() => _supportsSwitchingCamera = value));
-    _controller.supportsSwitchingTorch.then((bool value) => setState(() => _supportsSwitchingTorch = value));
+    _controller.supportsSwitchingCamera
+        .then((bool value) => setState(() => _supportsSwitchingCamera = value));
+    _controller.supportsSwitchingTorch
+        .then((bool value) => setState(() => _supportsSwitchingTorch = value));
   }
 
   @override
