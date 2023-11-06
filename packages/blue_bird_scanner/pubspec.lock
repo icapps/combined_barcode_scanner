@@ -52,9 +52,10 @@ packages:
   combined_barcode_scanner:
     dependency: "direct main"
     description:
-      path: "../.."
-      relative: true
-    source: path
+      name: combined_barcode_scanner
+      sha256: "2921c812b40aee91cdbc475e49a08f22958081bf40ee1f2105b2fed2bb7b334b"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.0"
   fake_async:
     dependency: transitive
