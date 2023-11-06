@@ -19,9 +19,9 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   
 ## snippet used for testing changes in combined_barcode_scanner during development:
-dependency_overrides:
- combined_barcode_scanner:
-   path: ../..
+#dependency_overrides:
+# combined_barcode_scanner:
+#   path: ../..
 
 flutter:
   plugin:
