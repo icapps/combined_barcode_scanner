@@ -63,7 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
         configuration: const ScannerConfiguration(
           enableFormats: {}, // enableFormats unfortunately does not work with the UsbKeyboardScanner, this configuration is managed by the device itself
         ),
-        scanners: [UsbKeyboardScanner()],
+        scanners: [UsbKeyboardScanner(
+          child: const SizedBox(),
+        )],
       ),
     );
   }
