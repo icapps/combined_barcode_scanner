@@ -1,3 +1,7 @@
+## 1.1.0
+
+* updated android sdk
+
 ## 1.0.0
 
 * initial release

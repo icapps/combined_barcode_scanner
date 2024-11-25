@@ -1,6 +1,6 @@
 name: combined_barcode_scanner_blue_bird
 description: Combined Barcode scanner package that interfaces with blue bird scanners
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 
