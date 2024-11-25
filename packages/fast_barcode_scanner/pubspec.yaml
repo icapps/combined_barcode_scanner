@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   combined_barcode_scanner: ^1.0.0
-  icapps_fast_barcode_scanner: ^1.3.0
+  icapps_fast_barcode_scanner: ^1.4.0
   flutter:
     sdk: flutter
 
