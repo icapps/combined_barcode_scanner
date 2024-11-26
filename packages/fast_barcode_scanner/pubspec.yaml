@@ -9,7 +9,7 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  combined_barcode_scanner: ^1.0.0
+  combined_barcode_scanner: ^1.1.0
   icapps_fast_barcode_scanner: ^1.4.0
   flutter:
     sdk: flutter

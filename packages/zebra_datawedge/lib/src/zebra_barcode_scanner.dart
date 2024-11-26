@@ -43,8 +43,7 @@ class ZebraBarcodeScanner implements BarcodeScanner {
   }) async {
     _supported = await _controller.isControllerSupported;
     if (_supported) {
-      await _controller.init(
-          profileName, _mapFormats(configuration.enableFormats));
+      await _controller.init(profileName, _mapFormats(configuration.enableFormats));
       _controller.scannerCallBack = _ScannerWrapper(onScan);
     }
     controller = _ZebraController(_controller, enabled: _supported)..start();
@@ -113,6 +112,9 @@ class _ZebraController extends BarcodeScannerController {
     this._scanner, {
     required this.enabled,
   });
+
+  @override
+  dynamic get imei => _scanner.imei;
 
   @override
   void pause() {

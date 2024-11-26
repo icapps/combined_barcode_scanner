@@ -18,24 +18,15 @@ class ZebraInterface {
     return version?.map((e) => e.toString()).toList() ?? [];
   }
 
-  static Future<bool> createProfile(
-      String name, List<String> supportedBarcodes) async {
-    return await _channel.invokeMethod<bool>('createProfile', <String, dynamic>{
-          'profileName': name,
-          'formats': supportedBarcodes
-        }) ==
-        true;
+  static Future<dynamic> get imei async => await _channel.invokeMethod<dynamic>('imei');
+
+  static Future<bool> createProfile(String name, List<String> supportedBarcodes) async {
+    return await _channel.invokeMethod<bool>('createProfile', <String, dynamic>{'profileName': name, 'formats': supportedBarcodes}) == true;
   }
 
-  static Future<bool> updateProfile(
-      String name, List<String> supportedBarcodes) async {
+  static Future<bool> updateProfile(String name, List<String> supportedBarcodes) async {
     try {
-      return await _channel.invokeMethod<bool>(
-              'updateProfile', <String, dynamic>{
-            'profileName': name,
-            'formats': supportedBarcodes
-          }) ==
-          true;
+      return await _channel.invokeMethod<bool>('updateProfile', <String, dynamic>{'profileName': name, 'formats': supportedBarcodes}) == true;
     } catch (e) {
       return false;
     }

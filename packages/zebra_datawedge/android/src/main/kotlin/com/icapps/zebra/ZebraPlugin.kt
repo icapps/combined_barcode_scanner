@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.annotation.NonNull
 import com.icapps.architecture.arch.ObservableFuture
+import com.icapps.architecture.arch.asObservable
 import com.icapps.architecture.arch.onMain
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -13,6 +14,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 
 /** ZebraPlugin */
 class ZebraPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
@@ -31,6 +33,7 @@ class ZebraPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler
         const val METHOD_START_SCAN = "startScan"
         const val METHOD_STOP_SCAN = "stopScan"
         const val METHOD_UPDATE_PROFILE = "updateProfile"
+        const val METHOD_IMEI = "imei"
         const val ARGUMENT_CODES = "formats"
     }
 
@@ -68,8 +71,13 @@ class ZebraPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler
             METHOD_START_SCAN -> startScan(result)
             METHOD_STOP_SCAN -> stopScan(result)
             METHOD_UPDATE_PROFILE -> updateProfile(call.argument<String>(ARGUMENT_PROFILE_NAME)!!, call.argument<List<String>>(ARGUMENT_CODES)!!, result)
+            METHOD_IMEI -> retrieveIMEI(result)
             else -> result.notImplemented()
         }
+    }
+
+    private fun retrieveIMEI(result: Result) {
+        dataWedgeInterface.retrieveIMEI(appContext).asObservable().dispatch(result)
     }
 
     private fun startScan(result: Result) {
