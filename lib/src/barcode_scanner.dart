@@ -64,6 +64,8 @@ abstract class BarcodeScannerController {
   /// Pauses the scanner, no events should be reported until
   /// [start] is called
   void pause();
+
+  dynamic get imei => null;
 }
 
 /// Hold the result of a successful scan.

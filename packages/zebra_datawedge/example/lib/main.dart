@@ -34,11 +34,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final BarcodeScannerWidgetController _controller;
+  final _scanner = ZebraBarcodeScanner('myProfile');
+  String? _imei;
+  var _loading = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = BarcodeScannerWidgetController();
+    _controller = BarcodeScannerWidgetController(_getImei);
+  }
+
+  void _getImei() async {
+    try {
+      _loading = true;
+      setState(() {});
+      _imei = await _scanner.controller.imei;
+      setState(() {});
+      // ignore: avoid_print
+      print("IMEI =========== $_imei");
+    } catch (e) {
+      // ignore: avoid_print
+      print("ERROR =========== $e");
+    }
+    _loading = false;
+    setState(() {});
   }
 
   @override
@@ -53,17 +72,29 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: BarcodeScannerWidget(
-        controller: _controller,
-        onScan: (code) {
-          if (kDebugMode) {
-            print("GOT BARCODE =========== ${code.code}");
-          }
-        },
-        configuration: const ScannerConfiguration(
-          enableFormats: {BarcodeFormat.qr},
-        ),
-        scanners: [ZebraBarcodeScanner('myProfile')],
+      body: Column(
+        children: [
+          Text("Loading =========== $_loading"),
+          Text("IMEI =========== $_imei"),
+          ElevatedButton(
+            onPressed: _getImei,
+            child: const Text('retry'),
+          ),
+          Expanded(
+            child: BarcodeScannerWidget(
+              controller: _controller,
+              onScan: (code) {
+                if (kDebugMode) {
+                  print("GOT BARCODE =========== ${code.code}");
+                }
+              },
+              configuration: const ScannerConfiguration(
+                enableFormats: {BarcodeFormat.qr},
+              ),
+              scanners: [_scanner],
+            ),
+          ),
+        ],
       ),
     );
   }

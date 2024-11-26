@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!--This is an auto generated document. Changes to this document may cause incorrect behavior.--><wap-provisioningdoc>
+  <characteristic type="ProfileInfo">
+    <parm name="created_wizard_version" value="11.0.2"/>
+  </characteristic>
+  <characteristic type="Profile">
+    <parm name="ProfileName" value="Ampere"/>
+    <parm name="ModifiedDate" value="2023-10-05 09:26:56"/>
+    <parm name="TargetSystemVersion" value="11.6"/>
+    <characteristic type="AccessMgr" version="11.5">
+      <parm name="emdk_name" value="IMEI"/>
+      <parm name="OperationMode" value="1"/>
+      <parm name="ServiceAccessAction" value="4"/>
+      <parm name="ServiceIdentifier" value="content://oem_info/wan/imei"/>
+      <parm name="CallerPackageName" value="nl.ampere.parcel.driver"/>
+      <parm name="CallerSignature" value="MIIDgTCCAmmgAwIBAgIIOrCQ1FG4qFMwDQYJKoZIhvcNAQELBQAwbzELMAkGA1UEBhMCQkUxEDAOBgNVBAgTB0FudHdlcnAxEDAOBgNVBAcTB0FudHdlcnAxDzANBgNVBAoTBmljYXBwczEPMA0GA1UECxMGaWNhcHBzMRowGAYDVQQDExFXaWxsaWFtIFZlcmhhZWdoZTAeFw0yMjAzMTQxMTE2MDZaFw00OTA3MzAxMTE2MDZaMG8xCzAJBgNVBAYTAkJFMRAwDgYDVQQIEwdBbnR3ZXJwMRAwDgYDVQQHEwdBbnR3ZXJwMQ8wDQYDVQQKEwZpY2FwcHMxDzANBgNVBAsTBmljYXBwczEaMBgGA1UEAxMRV2lsbGlhbSBWZXJoYWVnaGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCu7kQpxMkh1FeHdabeRESP57HRN9dmiqAJT890VXYzmVhSq/Zwjcctbc+P3TaA0NkksIHxh1gIJ76OW3SMQIxkP/95ZwAcsrdiqB/1PSMPticuTFIONBHxAxaZpPEeTCqxVjMmYI8bH5MgusO5nEI+X8d/X4ypRmEP8mAC45YhzZXPMQ1PsjUNrZXKpe+0M3T9e5N71m6rmO1jzCokR/lHd0mhqg2l8iLvCZSmX73rLUSYUFj1KMGYUcNkXtG9n3PuJBh6aUKh5aK/XhwbZumsw2ttC9T0bB7dS/FQRQ+0ms587k7dkhln1uRAMflKF822qDgpu+IO/InAvof0AyOdAgMBAAGjITAfMB0GA1UdDgQWBBTR6t5oqztOxRFO7ImJbnW5j1kAeDANBgkqhkiG9w0BAQsFAAOCAQEAoixzkVjVkH/M7jy17RnXLSK4WhzDoRx3Fe2PJMaGRXsWpH+ex/2XvBgYH/xFE0Ol42cX0T06AElZmEm/mlXRlLa/q0ZZBfT31BuQsW7nd94MnTklYzy5e1W08LRk0c0B1+yTCbYh3UcQD5jo1TXRKzipEBKzYhnm2MKk9PH66IMON/2RpO3+V39E+qXyvKS8KSA9xlgjBYTgiuqHUUvZn7vaDjIxCwqn4ukEnuEPEs5wmc6QI4sZS7t6biHbjpkIbVqe73lK4LBfaUsB+uceDf6evI6v+aHySpzJefU/0BWKjJ03lv1qMZSb/5/JkhLU+flRjfww2v1zriCKjHhbTQ=="/>
+    </characteristic>
+  </characteristic>
+</wap-provisioningdoc>

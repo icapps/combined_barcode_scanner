@@ -8,20 +8,15 @@ import 'package:flutter/foundation.dart';
 class ZebraDataWedgeController {
   ScannerCallBack? _scannerCallBack;
 
-  set scannerCallBack(ScannerCallBack scannerCallBack) => _scannerCallBack =
-      scannerCallBack; // ignore: avoid_setters_without_getters
+  set scannerCallBack(ScannerCallBack scannerCallBack) => _scannerCallBack = scannerCallBack; // ignore: avoid_setters_without_getters
 
-  void setScannerCallBack(ScannerCallBack scannerCallBack) =>
-      this.scannerCallBack =
-          scannerCallBack; // ignore: use_setters_to_change_properties
+  void setScannerCallBack(ScannerCallBack scannerCallBack) => this.scannerCallBack = scannerCallBack; // ignore: use_setters_to_change_properties
 
   StreamSubscription<String>? _subscription;
 
   ZebraDataWedgeController();
 
-  Future<bool> get isControllerSupported async =>
-      (!kIsWeb && Platform.isAndroid) &&
-      await ZebraInterface.isControllerSupported;
+  Future<bool> get isControllerSupported async => (!kIsWeb && Platform.isAndroid) && await ZebraInterface.isControllerSupported;
 
   Future<bool> init(String profileName, List<String> supportedFormats) async {
     if (!(await ZebraInterface.profiles).contains(profileName)) {
@@ -31,9 +26,10 @@ class ZebraDataWedgeController {
     }
   }
 
+  Future<dynamic> get imei async => await ZebraInterface.imei;
+
   Future<void> startScanning() async {
-    _subscription ??= ZebraInterface.events()
-        .listen((data) => _scannerCallBack?.onDecoded(data));
+    _subscription ??= ZebraInterface.events().listen((data) => _scannerCallBack?.onDecoded(data));
   }
 
   Future<void> stopScanning() async {
