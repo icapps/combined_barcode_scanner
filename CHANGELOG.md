@@ -1,3 +1,8 @@
+## 1.1.0
+
+* updated android sdk
+* added zebra imei
+
 ## 1.0.0
 
 * Updated packages to icapps versions so we can release this plugin

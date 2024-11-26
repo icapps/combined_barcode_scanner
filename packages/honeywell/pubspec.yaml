@@ -1,6 +1,6 @@
 name: combined_barcode_scanner_honeywell
 description: Combined Barcode scanner package that interfaces with honeywell scanners
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 

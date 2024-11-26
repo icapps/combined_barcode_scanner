@@ -43,5 +43,9 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
     <string>This app requires access to your phone’s camera solely for scanning barcodes</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
