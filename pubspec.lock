@@ -71,10 +71,10 @@ packages:
     dependency: "direct main"
     description:
       name: icapps_torch_compat
-      sha256: "5847269b394f228c23059e962ef3d404f30864f44cbab667ed898f1e987f6a0f"
+      sha256: "12d1d91aa5ca1d5bfb159b57d8081bbfe2e7756e0486c8ed457354a05be87272"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.2.0"
   leak_tracker:
     dependency: transitive
     description:

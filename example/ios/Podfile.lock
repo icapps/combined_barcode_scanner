@@ -1,28 +1,28 @@
 PODS:
-  - fast_barcode_scanner (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
-  - torch_compat (0.0.1):
+  - icapps_fast_barcode_scanner (0.0.1):
+    - Flutter
+  - icapps_torch_compat (0.0.1):
     - Flutter
 
 DEPENDENCIES:
-  - fast_barcode_scanner (from `.symlinks/plugins/fast_barcode_scanner/ios`)
   - Flutter (from `Flutter`)
-  - torch_compat (from `.symlinks/plugins/torch_compat/ios`)
+  - icapps_fast_barcode_scanner (from `.symlinks/plugins/icapps_fast_barcode_scanner/ios`)
+  - icapps_torch_compat (from `.symlinks/plugins/icapps_torch_compat/ios`)
 
 EXTERNAL SOURCES:
-  fast_barcode_scanner:
-    :path: ".symlinks/plugins/fast_barcode_scanner/ios"
   Flutter:
     :path: Flutter
-  torch_compat:
-    :path: ".symlinks/plugins/torch_compat/ios"
+  icapps_fast_barcode_scanner:
+    :path: ".symlinks/plugins/icapps_fast_barcode_scanner/ios"
+  icapps_torch_compat:
+    :path: ".symlinks/plugins/icapps_torch_compat/ios"
 
 SPEC CHECKSUMS:
-  fast_barcode_scanner: 0df01447443e9f9c7a6859844d8c4719887100b4
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  torch_compat: db407d33ee78b4e556d0c5b46b70da3f5095bcb8
+  icapps_fast_barcode_scanner: 83cb3d2c2ff3dc3c15ac27d1c2f51cf6817e184a
+  icapps_torch_compat: edf25c617b9a5fb83e993ec44e1bf04dac075b09
 
 PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
