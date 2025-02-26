@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final BarcodeScannerWidgetController _controller;
-  final _scanner = ZebraBarcodeScanner('myProfile');
+  final _scanner = ZebraBarcodeScanner('WilliamDebug');
   String? _imei;
   var _loading = true;
 

@@ -1,4 +1,4 @@
-package nl.ampere.parcel.driver
+package com.example.app
 
 import io.flutter.embedding.android.FlutterActivity
 
