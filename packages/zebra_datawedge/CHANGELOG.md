@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Fixed issues with setting decoder params
+
 ## 1.1.0
 
 * updated android sdk
