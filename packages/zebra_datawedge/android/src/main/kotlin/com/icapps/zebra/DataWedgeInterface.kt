@@ -31,7 +31,6 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         private const val INTENT_EXTRA_COMMAND = "COMMAND"
         private const val INTENT_EXTRA_RESULT = "RESULT"
         private const val INTENT_EXTRA_ACTION_SOFT_SCANNER = "com.symbol.datawedge.api.SOFT_SCAN_TRIGGER"
-        // private const val URI_IMEI = "somethingsomething"
         private const val URI_IMEI = "content://oem_info/wan/imei"
 
         private const val ID_GET_PROFILES = "getProfiles"
@@ -127,6 +126,8 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         barcodeConfig.putString("RESET_CONFIG", "true")
 
         val barcodeProps = Bundle()
+        barcodeProps.putString("scanner_input_enabled", "true");
+        barcodeProps.putString("scanner_selection_by_identifier", "INTERNAL_IMAGER");
         BarcodeType.values().forEach {
             barcodeProps.putString(it.decoderName, "${it in barcodes}")
         }
