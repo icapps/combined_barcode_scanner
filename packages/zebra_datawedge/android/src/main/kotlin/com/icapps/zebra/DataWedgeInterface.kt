@@ -129,7 +129,6 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         barcodeProps.putString("scanner_input_enabled", "true");
         barcodeProps.putString("scanner_selection_by_identifier", "INTERNAL_IMAGER");
         BarcodeType.values().forEach {
-            Log.e("Zebra", "Adding ${it.decoderName} ${it in barcodes} to bundle")
             barcodeProps.putString(it.decoderName, "${it in barcodes}")
         }
         barcodeConfig.putBundle("PARAM_LIST", barcodeProps)
