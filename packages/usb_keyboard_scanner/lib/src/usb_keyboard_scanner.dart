@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 /// Please follow the installation instructions in
 /// [https://pub.dev/packages/fast_barcode_scanner]
 class UsbKeyboardScanner implements BarcodeScanner {
-  int maxCharacterInputIntervalMs;
+  final int maxCharacterInputIntervalMs;
+  final Widget child;
 
   late ValueChanged<BarcodeScanResult> _onScan;
   late FocusNode _focusNode;
@@ -17,7 +18,10 @@ class UsbKeyboardScanner implements BarcodeScanner {
 
   var isRunning = true;
 
-  UsbKeyboardScanner({this.maxCharacterInputIntervalMs = 50});
+  UsbKeyboardScanner({
+    this.maxCharacterInputIntervalMs = 50,
+    required this.child,
+  });
 
   @override
   Widget? buildUI(ScannerConfiguration configuration, BuildContext context) =>
@@ -25,7 +29,7 @@ class UsbKeyboardScanner implements BarcodeScanner {
         focusNode: _focusNode,
         autofocus: true,
         onKeyEvent: _onKeyEvent,
-        child: const SizedBox(),
+        child: child,
       );
 
   @override
