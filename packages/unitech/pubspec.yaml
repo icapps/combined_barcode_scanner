@@ -1,6 +1,6 @@
 name: combined_barcode_scanner_unitech
 description: A scanner plugin for integration with unitech mobile scanners
-version: 1.1.0
+version: 1.2.0
 homepage: https://github.com/icapps/combined_barcode_scanner
 repository: https://github.com/icapps/combined_barcode_scanner
 
@@ -9,7 +9,7 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  combined_barcode_scanner: ^1.1.0
+  combined_barcode_scanner: ^1.2.0
   flutter:
     sdk: flutter
 
