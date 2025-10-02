@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:icapps_torch_compat/icapps_torch_compat.dart';
 
 typedef BoolCallback = bool Function();
 typedef BoolCallbackWithType = bool Function<T extends BarcodeScanner>();
@@ -35,7 +34,7 @@ class BarcodeScannerWidgetController {
 
   /// Whether the device can switch torch on/off
   Future<bool> get supportsSwitchingTorch async =>
-      await TorchCompat.hasTorch ?? false;
+      await false;
 
   /// Whether the device has a torch that is on
   bool get isTorchOn => _onIsTorchOnListener?.call() ?? false;
