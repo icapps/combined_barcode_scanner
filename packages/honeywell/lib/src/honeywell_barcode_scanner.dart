@@ -29,7 +29,7 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
   }) async {
     _supported = await _scanner.isSupported();
     if (_supported) {
-      _scanner.scannerCallBack = _ScannerWrapper(onScan);
+      _scanner.setScannerCallback(_ScannerWrapper(onScan));
 
       final properties = <String, dynamic>{
         ...CodeFormatUtils.getAsPropertiesComplement(
@@ -43,8 +43,8 @@ class HoneywellBarcodeScanner implements BarcodeScanner {
   @override
   void dispose() {
     if (_supported) {
-      _scanner.scannerCallBack = _ScannerWrapper((_) {});
       _scanner.stopScanner();
+      _scanner.disposeScanner();
     }
   }
 
@@ -100,18 +100,18 @@ List<CodeFormat> _makeFormats(Set<BarcodeFormat> enableFormats) {
   return enableFormats.mapNotNull(_mapFormat).toList();
 }
 
-class _ScannerWrapper implements ScannerCallBack {
+class _ScannerWrapper implements ScannerCallback {
   final ValueChanged<BarcodeScanResult> onScan;
 
   _ScannerWrapper(this.onScan);
 
   @override
-  void onDecoded(String? result) {
-    if (result != null) {
+  void onDecoded(ScannedData? scannedData) {
+    if (scannedData != null && scannedData.code != null) {
       onScan(
         BarcodeScanResult(
-          code: result,
-          format: null,
+          code: scannedData.code!,
+          format: _mapCodeId(scannedData.codeId),
           source: ScannerType.honeywell,
         ),
       );
@@ -154,6 +154,40 @@ CodeFormat? _mapFormat(BarcodeFormat e) {
       return CodeFormat.UPC_A;
     case BarcodeFormat.upcE:
       return CodeFormat.UPC_E;
+    default:
+      return null;
+  }
+}
+
+//https://sps-support.honeywell.com/s/article/List-of-Honeywell-barcode-symbology-Code-Identifiers
+BarcodeFormat? _mapCodeId(String? codeId) {
+  switch (codeId) {
+    case "s":
+      return BarcodeFormat.qr;
+    case "z":
+      return BarcodeFormat.aztec;
+    case "a":
+      return BarcodeFormat.codabar;
+    case "b":
+      return BarcodeFormat.code39;
+    case "i":
+      return BarcodeFormat.code93;
+    case "j":
+      return BarcodeFormat.code128;
+    case "w":
+      return BarcodeFormat.dataMatrix;
+    case "D":
+      return BarcodeFormat.ean8;
+    case "d":
+      return BarcodeFormat.ean13;
+    case "x":
+      return BarcodeFormat.maxiCode;
+    case "r":
+      return BarcodeFormat.pdf417;
+    case "c":
+      return BarcodeFormat.upcA;
+    case "E":
+      return BarcodeFormat.upcE;
     default:
       return null;
   }
