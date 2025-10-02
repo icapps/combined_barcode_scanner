@@ -1,5 +1,7 @@
+import 'package:flutter_datawedge/flutter_datawedge.dart';
+
 abstract class ScannerCallBack {
-  void onDecoded(String? result);
+  void onDecoded(ScanResult? result);
 
   void onError(Exception error);
 }

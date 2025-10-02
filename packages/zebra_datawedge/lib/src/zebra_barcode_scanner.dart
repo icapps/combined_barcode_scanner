@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:combined_barcode_scanner/combined_barcode_scanner.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/scan_callback.dart';
 import 'package:combined_barcode_scanner_zebra/src/zebra/zebra_datawedge_controller.dart';
-import 'package:combined_barcode_scanner_zebra/src/zebra/zebra_interface.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_datawedge/flutter_datawedge.dart';
 
 /// Barcode scanner implementation that uses the zebra
 /// hardware scanner where available.
@@ -43,7 +43,7 @@ class ZebraBarcodeScanner implements BarcodeScanner {
   }) async {
     _supported = await _controller.isControllerSupported;
     if (_supported) {
-      await _controller.init(profileName, _mapFormats(configuration.enableFormats));
+      await _controller.init(profileName);
       _controller.scannerCallBack = _ScannerWrapper(onScan);
     }
     controller = _ZebraController(_controller, enabled: _supported)..start();
@@ -75,9 +75,6 @@ class ZebraBarcodeScanner implements BarcodeScanner {
   );
 }
 
-List<String> _mapFormats(Set<BarcodeFormat> enableFormats) {
-  return enableFormats.mapNotNull(_mapFormat).toList();
-}
 
 class _ScannerWrapper implements ScannerCallBack {
   final ValueChanged<BarcodeScanResult> onScan;
@@ -85,12 +82,12 @@ class _ScannerWrapper implements ScannerCallBack {
   _ScannerWrapper(this.onScan);
 
   @override
-  void onDecoded(String? result) {
+  void onDecoded(ScanResult? result) {
     if (result != null) {
       onScan(
         BarcodeScanResult(
-          code: result,
-          format: null,
+          code: result.data,
+          format: _mapLabelType(result.labelType),
           source: ScannerType.zebra,
         ),
       );
@@ -99,6 +96,41 @@ class _ScannerWrapper implements ScannerCallBack {
 
   @override
   void onError(Exception error) {}
+}
+
+//https://techdocs.zebra.com/datawedge/15-0/guide/output/intent/
+BarcodeFormat? _mapLabelType(String e) {
+  switch (e) {
+    case "LABEL-TYPE-QRCODE":
+      return BarcodeFormat.qr;
+    case "LABEL-TYPE-AZTEC":
+      return BarcodeFormat.aztec;
+    case "LABEL-TYPE-CODABAR":
+      return BarcodeFormat.codabar;
+    case "LABEL-TYPE-CODE39":
+      return BarcodeFormat.code39;
+    case "LABEL-TYPE-CODE93":
+      return BarcodeFormat.code93;
+    case "LABEL-TYPE-CODE128":
+      return BarcodeFormat.code128;
+    case "LABEL-TYPE-DATAMATRIX":
+      return BarcodeFormat.dataMatrix;
+    case "LABEL-TYPE-EAN8":
+      return BarcodeFormat.ean8;
+    case "LABEL-TYPE-EAN13":
+      return BarcodeFormat.ean13;
+    case "LABEL-TYPE-MAXICODE":
+      return BarcodeFormat.maxiCode;
+    case "LABEL-TYPE-PDF417":
+      return BarcodeFormat.pdf417;
+    case "LABEL-TYPE-UPCA":
+      return BarcodeFormat.upcA;
+    case "LABEL-TYPE-UPCE0":
+    case "LABEL-TYPE-UPCE1":
+      return BarcodeFormat.upcE;
+    default:
+      return null;
+  }
 }
 
 class _ZebraController extends BarcodeScannerController {
@@ -131,48 +163,3 @@ class _ZebraController extends BarcodeScannerController {
   }
 }
 
-String? _mapFormat(BarcodeFormat e) {
-  switch (e) {
-    case BarcodeFormat.qr:
-      return QRCODE;
-    case BarcodeFormat.aztec:
-      return AZTEC;
-    case BarcodeFormat.codabar:
-      return CODEBAR;
-    case BarcodeFormat.code39:
-      return CODE39;
-    case BarcodeFormat.code93:
-      return CODE93;
-    case BarcodeFormat.code128:
-      return CODE128;
-    case BarcodeFormat.dataMatrix:
-      return DATAMATRIX;
-    case BarcodeFormat.ean8:
-      return EAN8;
-    case BarcodeFormat.ean13:
-      return EAN13;
-    case BarcodeFormat.maxiCode:
-      return MAXICODE;
-    case BarcodeFormat.pdf417:
-      return PDF417;
-    case BarcodeFormat.upcA:
-      return UPCA;
-    case BarcodeFormat.upcE:
-      return UPCE0;
-    default:
-      return null;
-  }
-}
-
-extension _IterableExt<T> on Iterable<T> {
-  Iterable<R> mapNotNull<R>(R? Function(T) mapper) {
-    final res = <R>[];
-    forEach((element) {
-      final mapped = mapper(element);
-      if (mapped != null) {
-        res.add(mapped);
-      }
-    });
-    return res;
-  }
-}
