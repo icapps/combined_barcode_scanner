@@ -1,3 +1,11 @@
+## 1.3.1
+
+* updated fast barcode scanner version to fix android crash
+
+## 1.3.0
+
+* updated fast barcode scanner version to fix 16 kb for android
+
 ## 1.2.0
 
 * updated android sdk
