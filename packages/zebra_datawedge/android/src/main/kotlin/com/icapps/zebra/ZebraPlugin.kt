@@ -3,6 +3,7 @@ package com.icapps.zebra
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import androidx.annotation.NonNull
 import com.icapps.architecture.arch.ObservableFuture
 import com.icapps.architecture.arch.asObservable
@@ -116,7 +117,16 @@ class ZebraPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler
 
     override fun onListen(arguments: Any?, events: EventChannel.EventSink) {
         broadcastReceivers += ScanIntentHandler(events).also {
-            appContext.registerReceiver(it, intentFilter)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                appContext.registerReceiver(
+                    it,
+                    intentFilter,
+                    Context.RECEIVER_EXPORTED
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                appContext.registerReceiver(it, intentFilter)
+            }
         }
     }
 
