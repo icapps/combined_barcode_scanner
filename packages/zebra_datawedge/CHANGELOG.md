@@ -1,3 +1,9 @@
+
+
+## 1.3.1
+
+* fixed plugin crashing on android from sdk 33
+
 ## 1.3.0
 
 * updated android sdk

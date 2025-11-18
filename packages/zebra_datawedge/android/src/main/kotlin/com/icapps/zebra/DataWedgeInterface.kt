@@ -2,6 +2,8 @@ package com.icapps.zebra
 
 import android.app.Activity
 import android.content.*
+import android.os.Build
+import android.content.Context
 import android.content.ContentValues.TAG
 import android.database.Cursor
 import android.net.Uri
@@ -44,7 +46,17 @@ class DataWedgeInterface(private val appContext: Context) : BroadcastReceiver() 
         val filter = IntentFilter()
         filter.addAction(INTENT_ACTION_RESULT_ACTION)
         filter.addCategory(Intent.CATEGORY_DEFAULT)
-        appContext.registerReceiver(this, filter)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            appContext.registerReceiver(
+                this,
+                filter,
+                Context.RECEIVER_EXPORTED
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            appContext.registerReceiver(this, filter)
+        }
     }
 
     fun destroy() {
