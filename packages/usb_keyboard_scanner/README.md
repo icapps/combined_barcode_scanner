@@ -18,6 +18,8 @@ BarcodeScannerWidget(
   configuration: const ScannerConfiguration(
     enableFormats: {}, // supported formats are determined by the scanner itself
   ),
-  scanners: [UsbKeyboardScanner()],
+  scanners: [UsbKeyboardScanner(
+    child: content, 
+  )],
 );
 ```

@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     UnitechBarcodeScanner(),
     BlueBirdBarcodeScanner(),
     ZebraBarcodeScanner('my_profile'),
-    UsbKeyboardScanner(),
+    UsbKeyboardScanner(child: const SizedBox()),
   ];
 
   @override
